@@ -73,6 +73,17 @@
   <main>
     <!-- Hero Section -->
     <section id="home" class="hero">
+
+      <!-- Ghost numbers floating in background (like Edgar's) -->
+      <div class="hero-grid-numbers" aria-hidden="true">
+        <span class="grid-num">7</span>
+        <span class="grid-num">2</span>
+        <span class="grid-num">8</span>
+        <span class="grid-num">5</span>
+        <span class="grid-num">3</span>
+        <span class="grid-num">1</span>
+      </div>
+
       <div class="container hero-container">
         <div class="hero-content">
           <div class="hero-stats label-text animate-up" style="--delay: 0.1s">
@@ -80,7 +91,9 @@
             <span>6 products</span> &middot;
             <span>6 products</span>
           </div>
-          <h1 class="hero-title animate-up" style="--delay: 0.2s">Hello, I'm <br />Railey Joaquin</h1>
+          <h1 class="hero-title animate-up" style="--delay: 0.2s">
+            Hello, I'm<br>Railey Joaquin
+          </h1>
           <h2 class="hero-subtitle animate-up" style="--delay: 0.3s">Graphic Designer</h2>
           <p class="hero-desc animate-up" style="--delay: 0.4s">
             I create modern visual experiences that make your brand clear, engaging, and memorable.
@@ -90,14 +103,18 @@
             <a href="#work" class="btn btn-outline">Case Studies</a>
           </div>
         </div>
+
         <div class="hero-image animate-fade-in" style="--delay: 0.4s">
           <div class="image-box">
-            <!-- Using a placeholder for now, you can replace with the actual photo -->
             <img src="/assets/images/railey-photo.png" alt="Railey Joaquin"
               onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'800\'><rect width=\'600\' height=\'800\' fill=\'%23f5f5f5\'/></svg>'">
           </div>
         </div>
       </div>
+
+      <!-- Scroll hint at bottom like Edgar's "0x01 // the work" -->
+      <div class="scroll-hint" aria-hidden="true">0x01 // the work</div>
+
     </section>
 
     <!-- About Section -->

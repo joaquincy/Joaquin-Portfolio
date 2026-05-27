@@ -9,19 +9,40 @@
   max-width: 600px;
 }
 
+/* ── Staggered Bio Line Reveal ── */
+.bio-lines {
+  margin-top: var(--space-4);
+}
+
+.bio-line {
+  line-height: 1.8;
+  margin: 0;
+  /* Each line uses scroll-reveal class + inline transition-delay for stagger */
+}
+
+/* ── Stats Row ── */
 .stats-row {
   display: flex;
   gap: var(--space-8);
   margin-top: var(--space-8);
   flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 .stat-item {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
-.stat-number, .stat-plus {
+/* Parallax Stats — GPU accelerated */
+.parallax-stat {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+.stat-number,
+.stat-plus {
   font-family: var(--font-hero);
   font-size: var(--text-4xl);
   font-weight: 700;
@@ -35,6 +56,13 @@
   margin-top: var(--space-2);
 }
 
+.stat-number-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+/* ── Skills ── */
 .about-skills {
   padding-top: var(--space-4);
 }
@@ -53,22 +81,133 @@
   font-size: var(--text-sm);
 }
 
+/* ── Corner Bracket Frame ── */
+.bracket-frame {
+  position: relative;
+  padding: 20px;
+}
+
+.bracket {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Start collapsed (0 size), animate in when visible */
+.bracket-frame:not(.is-visible) .bracket {
+  width: 0;
+  height: 0;
+}
+
+.bracket-tl {
+  top: 0;
+  left: 0;
+  border-top: 2px solid var(--color-gray-dark);
+  border-left: 2px solid var(--color-gray-dark);
+}
+
+.bracket-tr {
+  top: 0;
+  right: 0;
+  border-top: 2px solid var(--color-gray-dark);
+  border-right: 2px solid var(--color-gray-dark);
+}
+
+.bracket-bl {
+  bottom: 0;
+  left: 0;
+  border-bottom: 2px solid var(--color-gray-dark);
+  border-left: 2px solid var(--color-gray-dark);
+}
+
+.bracket-br {
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid var(--color-gray-dark);
+  border-right: 2px solid var(--color-gray-dark);
+}
+
+/* ── Tools Grid ── */
 .tools-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-4);
 }
 
 .tool-badge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-4);
-  background-color: var(--color-gray-light);
+  width: 64px;
+  height: 64px;
+
+}
+
+.tool-badge img,
+.tool-badge svg {
+  display: block;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.tool-badge:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Tool Hover Card (Tooltip) ── */
+.tool-badge::after {
+  content: attr(data-tool) "\A" "Used for: " attr(data-used) "\A" "Proficiency: " attr(data-proficiency);
+  white-space: pre-line;
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: var(--color-black);
+  color: var(--color-white);
+  font-size: 0.7rem;
+  line-height: 1.5;
+  padding: 10px 14px;
   border-radius: 8px;
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  font-weight: 700;
+  width: max-content;
+  max-width: 220px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 10;
+  font-family: var(--font-body);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Small arrow pointing down */
+.tool-badge::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--color-black);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.tool-badge:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.tool-badge:hover::before {
+  opacity: 1;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (min-width: 1024px) {

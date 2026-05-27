@@ -54,6 +54,40 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.5 });
 
   counterElements.forEach(el => counterObserver.observe(el));
+
+  // 3. Parallax Split on Stats Row — lightweight rAF-based
+  const parallaxStats = document.querySelectorAll('.parallax-stat');
+
+  if (parallaxStats.length) {
+    const aboutSection = document.getElementById('about');
+    let ticking = false;
+
+    const updateParallax = () => {
+      if (!aboutSection) return;
+      const rect = aboutSection.getBoundingClientRect();
+      const windowH = window.innerHeight;
+
+      // Only calculate when the about section is near viewport
+      if (rect.top < windowH && rect.bottom > 0) {
+        // How far past the viewport top the section has scrolled (0 at bottom edge, positive as it rises)
+        const scrolled = windowH - rect.top;
+
+        parallaxStats.forEach(stat => {
+          const speed = parseFloat(stat.dataset.speed) || 1;
+          const yOffset = (scrolled * speed * 0.05) - 20; // subtle movement
+          stat.style.transform = `translateY(${yOffset}px)`;
+        });
+      }
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }, { passive: true });
+  }
 });
 
 // ── Text Scramble Effect ─────────────────────────────────────

@@ -139,43 +139,93 @@
     <!-- About Section -->
     <section id="about" class="about section">
       <div class="container about-container">
-        <div class="about-bio scroll-reveal">
-          <h2 class="section-title">About Me</h2>
-          <p>
-            Design isn't just about making things look pretty—it's about solving problems and telling stories. With over
-            3 years of experience in the creative field, I've honed my skills in crafting functional and aesthetically
-            pleasing designs that elevate brands and connect with audiences.
-          </p>
-          <div class="stats-row">
+        <div class="about-bio">
+          <h2 class="section-title scroll-reveal">About Me</h2>
+          <!-- Staggered line reveal on the bio paragraph -->
+          <div class="bio-lines">
+            <p class="bio-line scroll-reveal" style="transition-delay: 0.05s">Design isn't just about making things look
+              pretty—it's about solving</p>
+            <p class="bio-line scroll-reveal" style="transition-delay: 0.10s">problems and telling stories. With over 3
+              years of experience in the</p>
+            <p class="bio-line scroll-reveal" style="transition-delay: 0.15s">creative field, I've honed my skills in
+              crafting functional and aesthetically</p>
+            <p class="bio-line scroll-reveal" style="transition-delay: 0.20s">pleasing designs that elevate brands and
+              connect with audiences.</p>
+          </div>
+          <!-- Parallax stats — each moves at a different scroll speed -->
+          <div class="stats-row parallax-stat" data-speed="0.7">
             <div class="stat-item">
-              <span class="stat-number counter" data-target="3">0</span><span class="stat-plus">+</span>
+              <div class="stat-number-wrap">
+                <span class="stat-number counter" data-target="3">0</span>
+                <span class="stat-plus">+</span>
+              </div>
               <span class="stat-label">Years of experience</span>
             </div>
             <div class="stat-item">
-              <span class="stat-number counter" data-target="50">0</span><span class="stat-plus">+</span>
+              <div class="stat-number-wrap">
+                <span class="stat-number counter" data-target="50">0</span>
+                <span class="stat-plus">+</span>
+              </div>
               <span class="stat-label">Projects completed</span>
             </div>
             <div class="stat-item">
-              <span class="stat-number counter" data-target="30">0</span><span class="stat-plus">+</span>
+              <div class="stat-number-wrap">
+                <span class="stat-number counter" data-target="30">0</span>
+                <span class="stat-plus">+</span>
+              </div>
               <span class="stat-label">Happy clients</span>
             </div>
           </div>
         </div>
-        <div class="about-skills scroll-reveal">
-          <h3 class="subsection-title">Skills</h3>
-          <ul class="skills-list">
+        <div class="about-skills">
+          <h3 class="subsection-title scroll-reveal">Skills</h3>
+          <ul class="skills-list scroll-reveal" style="transition-delay: 0.05s">
             <li>Branding</li>
             <li>UI/UX</li>
             <li>Print Design</li>
             <li>Motion Graphics</li>
             <li>Web Design</li>
           </ul>
-          <h3 class="subsection-title">Tools</h3>
-          <div class="tools-grid">
-            <div class="tool-badge">Figma</div>
-            <div class="tool-badge">Photoshop</div>
-            <div class="tool-badge">Illustrator</div>
-            <div class="tool-badge">After Effects</div>
+          <h3 class="subsection-title scroll-reveal" style="transition-delay: 0.1s">Tools</h3>
+          <!-- Corner Bracket Frame -->
+          <div class="bracket-frame scroll-reveal" style="transition-delay: 0.15s">
+            <span class="bracket bracket-tl"></span>
+            <span class="bracket bracket-tr"></span>
+            <span class="bracket bracket-bl"></span>
+            <span class="bracket bracket-br"></span>
+            <div class="tools-grid">
+              <div class="tool-badge" data-tool="Figma" data-used="UI/UX, Wireframes, Prototyping"
+                data-proficiency="Advanced">
+                <img src="assets/images/figma.png" alt="Figma" width="100" height="100">
+              </div>
+              <div class="tool-badge" data-tool="Canva" data-used="Social Media, Quick Graphics"
+                data-proficiency="Advanced">
+                <img src="assets/images/canva.jpg" alt="Canva" width="40" height="40">
+              </div>
+              <div class="tool-badge" data-tool="WordPress" data-used="CMS, Blog, Web Dev"
+                data-proficiency="Intermediate">
+                <img src="assets/images/wordpress.png" alt="WordPress" width="40" height="40">
+              </div>
+              <div class="tool-badge" data-tool="CapCut" data-used="Video Editing, Reels" data-proficiency="Advanced">
+                <img src="/assets/images/capcut.png" alt="CapCut" width="40" height="40">
+              </div>
+              <div class="tool-badge" data-tool="Illustrator" data-used="Vector Art, Logos, Icons"
+                data-proficiency="Advanced">
+                <img src="assets/images/illustrator.png" alt="Illustrator" width="40" height="40">
+              </div>
+              <div class="tool-badge" data-tool="Photoshop" data-used="Photo Edit, Composites, Mockups"
+                data-proficiency="Advanced">
+                <img src="assets/images/photoshop.png" alt="Photoshop" width="40" height="40">
+              </div>
+              <div class="tool-badge" data-tool="After Effects" data-used="Motion Graphics, Animation"
+                data-proficiency="Intermediate">
+                <img src="assets/images/aftereffects.png" alt="After Effects" width="40" height="40">
+              </div>
+              <div class="tool-badge" data-tool="Premiere Pro" data-used="Video editing, B-Rolls"
+                data-proficiency="Intermediate">
+                <img src="assets/images/premierepro.png" alt="After Effects" width="40" height="40">
+              </div>
+            </div>
           </div>
         </div>
       </div>

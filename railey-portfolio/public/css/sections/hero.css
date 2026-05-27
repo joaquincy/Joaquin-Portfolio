@@ -32,6 +32,7 @@
 
 /* ── Title — reduced from 7xl to feel like Edgar's ── */
 .hero-title {
+  font-family: var(--font-neue-plak);
   font-size: clamp(2rem, 5vw, 3.2rem);
   /* compact, not massive */
   line-height: 1.1;

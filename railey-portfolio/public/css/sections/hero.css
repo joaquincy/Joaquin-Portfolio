@@ -143,12 +143,6 @@
   /* contained, not full width */
   margin: 0 auto;
   aspect-ratio: 3/4;
-  /* Gradient Border */
-  padding: 3px;
-  background: linear-gradient(135deg, #667eea, #764ba2, #f5576c, #f6d365);
-  /* hue-rotate is completely paint-free and GPU accelerated */
-  animation: hueShift 6s linear infinite;
-  will-change: filter;
 }
 
 .image-box img {
@@ -157,18 +151,6 @@
   object-fit: cover;
   object-position: top center;
   display: block;
-  border-radius: 2px;
-  background-color: #f7f7f7;
-}
-
-@keyframes hueShift {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-
-  100% {
-    filter: hue-rotate(360deg);
-  }
 }
 
 /* ── DOT GRID background (like Edgar's) ── */

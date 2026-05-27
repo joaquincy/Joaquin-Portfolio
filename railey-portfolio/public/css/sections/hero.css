@@ -10,6 +10,21 @@
   /* Edgar's slightly off-white bg */
 }
 
+/* Performant SVG Noise Overlay */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.04;
+  /* Subtle grain */
+  /* SVG Data URI tiling is highly performant compared to full-page DOM filters */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  /* Hardware acceleration */
+  transform: translateZ(0);
+}
+
 .hero-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -28,6 +43,54 @@
   word-spacing: 0.15em;
   font-size: 0.78rem;
   /* slightly smaller than before */
+}
+
+/* ── Availability Badge (GPU Optimized Pulse) ── */
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #15803d;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.pulse-dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: #22c55e;
+  /* Using transform and opacity avoids layout/paint triggers */
+  animation: pulseRipple 2s ease-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes pulseRipple {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+.stats-divider {
+  margin: 0 4px;
 }
 
 /* ── Title — reduced from 7xl to feel like Edgar's ── */
@@ -80,6 +143,12 @@
   /* contained, not full width */
   margin: 0 auto;
   aspect-ratio: 3/4;
+  /* Gradient Border */
+  padding: 3px;
+  background: linear-gradient(135deg, #667eea, #764ba2, #f5576c, #f6d365);
+  /* hue-rotate is completely paint-free and GPU accelerated */
+  animation: hueShift 6s linear infinite;
+  will-change: filter;
 }
 
 .image-box img {
@@ -88,6 +157,18 @@
   object-fit: cover;
   object-position: top center;
   display: block;
+  border-radius: 2px;
+  background-color: #f7f7f7;
+}
+
+@keyframes hueShift {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
+  }
 }
 
 /* ── DOT GRID background (like Edgar's) ── */

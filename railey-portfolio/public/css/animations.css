@@ -156,12 +156,6 @@
   border-color: var(--color-blue);
 }
 
-/* Scramble — chars flash blue while randomizing */
-.scramble-char {
-  color: var(--color-blue);
-  opacity: 0.75;
-}
-
 .hero-title {
   cursor: default;
   transition: opacity 0.2s;

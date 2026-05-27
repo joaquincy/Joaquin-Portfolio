@@ -73,8 +73,8 @@ class TextScramble {
     for (let i = 0; i < length; i++) {
       const from = oldText[i] || '';
       const to = newText[i] || '';
-      const start = Math.floor(Math.random() * 10);
-      const end = start + Math.floor(Math.random() * 15);
+      const start = i * 4;           // ← each char starts 4 frames after the previous
+      const end = start + 30;      // ← each char scrambles for 18 frames then locks in
       this.queue.push({ from, to, start, end });
     }
 
@@ -95,17 +95,17 @@ class TextScramble {
         complete++;
         output += to;
       } else if (this.frame >= start) {
-        if (!char || Math.random() < 0.28) {
+        if (!char || Math.random() < 0.12) {
           char = this.chars[Math.floor(Math.random() * this.chars.length)];
           this.queue[i].char = char;
         }
-        output += `<span class="scramble-char">${char}</span>`;
+        output += char;           // ← plain char, no span wrapper
       } else {
         output += from;
       }
     }
 
-    this.el.innerHTML = output;
+    this.el.textContent = output; // ← textContent: no HTML parse, no DOM nodes
 
     if (complete === this.queue.length) {
       this.resolve();
@@ -152,7 +152,7 @@ if (scrambleEl) {
       if (!isHovering) return;
       currentIndex = (currentIndex % (phrases.length - 1)) + 1;
       fx.setText(phrases[currentIndex]);
-    }, 2000);
+    }, 3500);
   }
 
   function stopCycle() {

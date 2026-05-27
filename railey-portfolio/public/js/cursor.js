@@ -3,17 +3,17 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.matchMedia("(pointer: fine)").matches) {
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorOutline = document.querySelector('.cursor-outline');
-    
+
     if (!cursorDot || !cursorOutline) return;
 
     window.addEventListener('mousemove', (e) => {
       const posX = e.clientX;
       const posY = e.clientY;
-      
+
       // Dot follows exactly
       cursorDot.style.left = `${posX}px`;
       cursorDot.style.top = `${posY}px`;
-      
+
       // Outline follows with a tiny delay using animation
       cursorOutline.animate({
         left: `${posX}px`,
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add hover effect for links and buttons
     const hoverElements = document.querySelectorAll('a, button, .work-card');
-    
+
     hoverElements.forEach(el => {
       el.addEventListener('mouseenter', () => {
         document.body.classList.add('cursor-hover');

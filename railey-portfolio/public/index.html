@@ -65,11 +65,20 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      <button class="menu-toggle" aria-label="Toggle menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
+      <div class="nav-actions">
+        <button class="dark-mode-toggle" aria-label="Toggle Dark Mode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span>DARK</span>
+        </button>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -89,15 +98,16 @@
 
       <div class="container hero-container">
         <div class="hero-content">
-          <div class="hero-stats label-text animate-up" style="--delay: 0.1s">
-            <span class="availability-badge">
+          <div class="hero-stats-wrapper animate-up" style="--delay: 0.1s">
+            <div class="availability-badge">
               <span class="pulse-dot"></span>
               Available for work
-            </span>
-            <span class="stats-divider">&middot;</span>
-            <span>3+ years</span> &middot;
-            <span>6 products</span> &middot;
-            <span>6 products</span>
+            </div>
+            <div class="hero-stats label-text">
+              <span>3+ years</span> &middot;
+              <span>6 products</span> &middot;
+              <span>6 products</span>
+            </div>
           </div>
           <h1 class="hero-title animate-up" style="--delay: 0.2s">
             Hello, I'm<br><span id="scramble-text">Railey Joaquin</span>

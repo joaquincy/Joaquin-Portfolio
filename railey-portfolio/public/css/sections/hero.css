@@ -37,9 +37,15 @@
   z-index: 2;
 }
 
-/* ── Stats row ── */
-.hero-stats {
+/* ── Stats wrapper and row ── */
+.hero-stats-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
   margin-bottom: var(--space-5);
+}
+
+.hero-stats {
   word-spacing: 0.15em;
   font-size: 0.78rem;
   /* slightly smaller than before */
@@ -87,10 +93,6 @@
     transform: scale(3);
     opacity: 0;
   }
-}
-
-.stats-divider {
-  margin: 0 4px;
 }
 
 /* ── Title — reduced from 7xl to feel like Edgar's ── */

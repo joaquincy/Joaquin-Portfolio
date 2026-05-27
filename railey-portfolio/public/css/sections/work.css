@@ -17,7 +17,8 @@
   transition: var(--transition-normal);
 }
 
-.filter-btn:hover, .filter-btn.active {
+.filter-btn:hover,
+.filter-btn.active {
   background-color: var(--color-black);
   color: var(--color-white);
 }

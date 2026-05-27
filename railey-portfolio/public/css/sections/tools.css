@@ -9,7 +9,7 @@
 
 .tools-container {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   /* Keep content above rings */
   display: flex;
   flex-direction: column;
@@ -84,66 +84,64 @@
   margin-top: var(--space-2);
 }
 
-/* ── Badges Row ── */
-.tools-badges-row {
+/* ── Tab Hotspots (invisible overlay on the tab bar) ── */
+.tab-hotspots {
+  position: absolute;
+  top: 0;
+  /* Sits at the very top of the mockup (the tab bar) */
+  left: 0;
+  width: 100%;
+  height: 28px;
+  /* Approximate height of the tab bar in the image */
   display: flex;
-  flex-wrap: nowrap;
-  /* Prevent wrapping so they align horizontally with the tabs */
-  justify-content: space-between;
-  /* Spread them out like the tabs */
-  width: 96%;
-  /* Slightly smaller than the full mockup to account for edges */
-  max-width: 860px;
-  /* Aligns with the 900px mockup max-width minus margins */
-  margin: 0 auto var(--space-8) auto;
+  z-index: 5;
+}
+
+.tab-hotspot {
+  flex: 1;
+  /* Each hotspot takes equal width across the tab bar */
   position: relative;
-  z-index: 2;
-  /* Optional: overflow-x auto for mobile to keep the row straight */
-  overflow-x: auto;
-  padding-bottom: 10px;
-  /* Space for scrollbar on mobile if needed */
+  cursor: pointer;
 }
 
-.tool-badge-pill {
-  width: 64px;
-  height: 64px;
-  background-color: transparent;
-  /* Removed black background so the image serves as the box */
-  border-radius: 16px;
-  /* Rounded square */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* The badge that pops up on hover */
+.hover-badge {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  /* Pop up above the tab */
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-.tool-badge-pill img,
-.tool-badge-pill svg {
+.hover-badge img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Fit exactly to the box */
-  border-radius: 16px;
-  /* Match the pill's border radius */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: scale(1.2);
+  /* Fill the badge tightly */
 }
 
-.tool-badge-pill:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+/* Show badge on hover */
+.tab-hotspot:hover .hover-badge {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
-/* ── Tool Hover Card (Tooltip) ── */
-.tool-badge-pill {
-  position: relative;
-  /* Ensure tooltips position relative to the badge */
-}
-
-.tool-badge-pill::after {
+/* Tooltip on hover */
+.tab-hotspot::after {
   content: attr(data-tool) "\A" "Used for: " attr(data-used) "\A" "Proficiency: " attr(data-proficiency);
   white-space: pre-line;
   position: absolute;
-  bottom: calc(100% + 12px);
+  bottom: calc(100% + 72px);
+  /* Above the badge */
   left: 50%;
   transform: translateX(-50%) translateY(8px);
   background: var(--color-black);
@@ -156,34 +154,34 @@
   max-width: 220px;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.25s ease 0.1s, transform 0.25s ease 0.1s;
   z-index: 10;
   font-family: var(--font-body);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   text-align: left;
 }
 
-/* Small arrow pointing down */
-.tool-badge-pill::before {
+/* Tooltip arrow */
+.tab-hotspot::before {
   content: '';
   position: absolute;
-  bottom: calc(100% + 4px);
+  bottom: calc(100% + 64px);
   left: 50%;
   transform: translateX(-50%);
   border: 6px solid transparent;
   border-top-color: var(--color-black);
   opacity: 0;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease 0.1s;
   z-index: 10;
   pointer-events: none;
 }
 
-.tool-badge-pill:hover::after {
+.tab-hotspot:hover::after {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
 
-.tool-badge-pill:hover::before {
+.tab-hotspot:hover::before {
   opacity: 1;
 }
 
@@ -207,7 +205,6 @@
   background: radial-gradient(circle, rgba(0, 102, 255, 0.4) 0%, transparent 70%);
   filter: blur(60px);
   z-index: -1;
-  /* Behind the image */
   pointer-events: none;
 }
 
@@ -218,7 +215,6 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
   background-color: #111;
-  /* Dark fallback */
   display: block;
   /* Fade out at the bottom */
   -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
@@ -236,13 +232,14 @@
     height: 500px;
   }
 
-  .tool-badge-pill {
-    width: 56px;
-    height: 56px;
+  .hover-badge {
+    width: 40px;
+    height: 40px;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
 
-  .tool-badge-pill img {
-    width: 28px;
-    height: 28px;
+  .tab-hotspots {
+    height: 20px;
   }
 }

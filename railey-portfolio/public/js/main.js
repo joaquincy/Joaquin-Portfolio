@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       // Update UI to loading state
       btnText.style.display = 'none';
       btnLoader.style.display = 'inline-block';

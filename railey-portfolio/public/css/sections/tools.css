@@ -1,0 +1,248 @@
+/* Tools Section */
+.tools {
+  position: relative;
+  overflow: hidden;
+  /* Hide orbital rings that go out of bounds */
+  padding: var(--space-16) 0;
+  background-color: var(--color-white);
+}
+
+.tools-container {
+  position: relative;
+  z-index: 2;
+  /* Keep content above rings */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Orbital Rings Background ── */
+.orbital-rings {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vw;
+  max-width: 1200px;
+  max-height: 1200px;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ring {
+  position: absolute;
+  border: 1px dashed rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  /* Optional: animation to rotate the rings slowly */
+  animation: spin 60s linear infinite;
+}
+
+.ring-1 {
+  width: 400px;
+  height: 400px;
+}
+
+.ring-2 {
+  width: 700px;
+  height: 700px;
+  animation-direction: reverse;
+  animation-duration: 80s;
+}
+
+.ring-3 {
+  width: 1000px;
+  height: 1000px;
+  animation-duration: 100s;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Header ── */
+.tools-header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+  max-width: 600px;
+  position: relative;
+  z-index: 2;
+}
+
+.tools-subtitle {
+  font-size: var(--text-lg);
+  color: var(--color-gray-dark);
+  margin-top: var(--space-2);
+}
+
+/* ── Badges Row ── */
+.tools-badges-row {
+  display: flex;
+  flex-wrap: nowrap;
+  /* Prevent wrapping so they align horizontally with the tabs */
+  justify-content: space-between;
+  /* Spread them out like the tabs */
+  width: 96%;
+  /* Slightly smaller than the full mockup to account for edges */
+  max-width: 860px;
+  /* Aligns with the 900px mockup max-width minus margins */
+  margin: 0 auto var(--space-8) auto;
+  position: relative;
+  z-index: 2;
+  /* Optional: overflow-x auto for mobile to keep the row straight */
+  overflow-x: auto;
+  padding-bottom: 10px;
+  /* Space for scrollbar on mobile if needed */
+}
+
+.tool-badge-pill {
+  width: 64px;
+  height: 64px;
+  background-color: transparent;
+  /* Removed black background so the image serves as the box */
+  border-radius: 16px;
+  /* Rounded square */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tool-badge-pill img,
+.tool-badge-pill svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Fit exactly to the box */
+  border-radius: 16px;
+  /* Match the pill's border radius */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tool-badge-pill:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Tool Hover Card (Tooltip) ── */
+.tool-badge-pill {
+  position: relative;
+  /* Ensure tooltips position relative to the badge */
+}
+
+.tool-badge-pill::after {
+  content: attr(data-tool) "\A" "Used for: " attr(data-used) "\A" "Proficiency: " attr(data-proficiency);
+  white-space: pre-line;
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: var(--color-black);
+  color: var(--color-white);
+  font-size: 0.7rem;
+  line-height: 1.5;
+  padding: 10px 14px;
+  border-radius: 8px;
+  width: max-content;
+  max-width: 220px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 10;
+  font-family: var(--font-body);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+/* Small arrow pointing down */
+.tool-badge-pill::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--color-black);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.tool-badge-pill:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.tool-badge-pill:hover::before {
+  opacity: 1;
+}
+
+/* ── Mockup Wrapper & Glowing Effect ── */
+.tools-mockup-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+/* Glowing Blue Gradient Behind the Mockup */
+.glow-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.4) 0%, transparent 70%);
+  filter: blur(60px);
+  z-index: -1;
+  /* Behind the image */
+  pointer-events: none;
+}
+
+.browser-mockup {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #111;
+  /* Dark fallback */
+  display: block;
+  /* Fade out at the bottom */
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ring-3 {
+    display: none;
+  }
+
+  .ring-2 {
+    width: 500px;
+    height: 500px;
+  }
+
+  .tool-badge-pill {
+    width: 56px;
+    height: 56px;
+  }
+
+  .tool-badge-pill img {
+    width: 28px;
+    height: 28px;
+  }
+}

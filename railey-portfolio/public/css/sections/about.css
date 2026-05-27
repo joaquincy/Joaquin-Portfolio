@@ -1,0 +1,78 @@
+/* About Section */
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+}
+
+.about-bio {
+  max-width: 600px;
+}
+
+.stats-row {
+  display: flex;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number, .stat-plus {
+  font-family: var(--font-hero);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: var(--color-blue);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: var(--text-sm);
+  color: var(--color-gray-dark);
+  margin-top: var(--space-2);
+}
+
+.about-skills {
+  padding-top: var(--space-4);
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.skills-list li {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-gray-dark);
+  border-radius: 40px;
+  font-size: var(--text-sm);
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.tool-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background-color: var(--color-gray-light);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+@media (min-width: 1024px) {
+  .about-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}

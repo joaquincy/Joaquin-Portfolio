@@ -118,6 +118,28 @@
   transform: translateY(0);
 }
 
+/* Section divider line — animates on scroll */
+.section-line {
+  position: relative;
+}
+
+.section-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-blue), transparent);
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center;
+}
+
+.section-line.line-visible::before {
+  transform: translateX(-50%) scaleX(1);
+}
+
 /* Custom Cursor */
 .cursor-dot,
 .cursor-outline {

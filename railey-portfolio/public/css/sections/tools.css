@@ -2,8 +2,8 @@
 .tools {
   position: relative;
   overflow: hidden;
-  /* Hide orbital rings that go out of bounds */
-  padding: var(--space-16) 0;
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-16);
   background-color: var(--color-white);
 }
 

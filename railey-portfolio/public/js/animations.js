@@ -20,6 +20,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   revealElements.forEach(el => revealObserver.observe(el));
 
+  // 1b. Section Divider Lines
+  const sectionLines = document.querySelectorAll('.section-line');
+
+  const lineObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('line-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    root: null,
+    threshold: 0.1,
+  });
+
+  sectionLines.forEach(el => lineObserver.observe(el));
+
 
   // 2. Number Counters
   const counterElements = document.querySelectorAll('.counter');
@@ -107,11 +124,14 @@ class TextScramble {
     for (let i = 0; i < length; i++) {
       const from = oldText[i] || '';
       const to = newText[i] || '';
-      const start = i * 4;           // ← each char starts 4 frames after the previous
-      const end = start + 30;      // ← each char scrambles for 18 frames then locks in
+      // Increased frame duration slightly to give a "slower reveal" effect,
+      // but kept it optimized to prevent the lag from returning.
+      const start = Math.floor(i * 3.5);
+      const end = start + 20;
       this.queue.push({ from, to, start, end });
     }
 
+    // clearTimeout no longer needed as we use native rAF
     cancelAnimationFrame(this.frameRequest);
     this.frame = 0;
     this.update();
@@ -129,7 +149,8 @@ class TextScramble {
         complete++;
         output += to;
       } else if (this.frame >= start) {
-        if (!char || Math.random() < 0.12) {
+        // Lower probability of swapping to reduce string manipulations slightly
+        if (!char || Math.random() < 0.15) {
           char = this.chars[Math.floor(Math.random() * this.chars.length)];
           this.queue[i].char = char;
         }
@@ -139,11 +160,14 @@ class TextScramble {
       }
     }
 
-    this.el.textContent = output; // ← textContent: no HTML parse, no DOM nodes
+    if (this.el.textContent !== output) {
+      this.el.textContent = output; // ← only update DOM if text actually changed to prevent layout thrashing
+    }
 
     if (complete === this.queue.length) {
       this.resolve();
     } else {
+      // Use native requestAnimationFrame for maximum smoothness (60+ FPS)
       this.frameRequest = requestAnimationFrame(this.update);
       this.frame++;
     }
@@ -186,7 +210,7 @@ if (scrambleEl) {
       if (!isHovering) return;
       currentIndex = (currentIndex % (phrases.length - 1)) + 1;
       fx.setText(phrases[currentIndex]);
-    }, 3500);
+    }, 4000);
   }
 
   function stopCycle() {

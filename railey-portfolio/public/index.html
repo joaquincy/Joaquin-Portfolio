@@ -133,12 +133,12 @@
       </div>
 
       <!-- Scroll hint at bottom like Edgar's "0x01 // the work" -->
-      <div class="scroll-hint" aria-hidden="true">0x01 // the work</div>
+      <div class="scroll-hint" aria-hidden="true">0x01 // About Me</div>
 
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about section">
+    <section id="about" class="about section section-line">
       <div class="container about-container">
         <div class="about-bio">
           <h2 class="section-title scroll-reveal">About Me</h2>
@@ -193,7 +193,7 @@
     </section>
 
     <!-- Tools Section -->
-    <section id="tools" class="tools section">
+    <section id="tools" class="tools section ">
       <div class="container tools-container">
         <!-- Orbital Rings Background -->
         <div class="orbital-rings" aria-hidden="true">
@@ -251,83 +251,144 @@
     </section>
 
     <!-- Work Section -->
-    <section id="work" class="work section bg-light">
+    <section id="work" class="work section bg-light section-line">
       <div class="container">
-        <h2 class="section-title text-center scroll-reveal">Selected Work</h2>
-        <div class="work-filters scroll-reveal">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="branding">Branding</button>
-          <button class="filter-btn" data-filter="web">Web Design</button>
-          <button class="filter-btn" data-filter="print">Print</button>
-          <button class="filter-btn" data-filter="motion">Motion</button>
+        <div class="work-header-area scroll-reveal">
+          <div class="work-header-left">
+            <div class="view-options">
+              <span class="view-label">View</span>
+              <button class="view-btn active" aria-label="Slider View">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="6" width="18" height="12" rx="2"></rect>
+                </svg>
+              </button>
+              <button class="view-btn" aria-label="List View">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="4" y="6" width="16" height="3" rx="1"></rect>
+                  <rect x="4" y="11" width="16" height="3" rx="1"></rect>
+                  <rect x="4" y="16" width="16" height="3" rx="1"></rect>
+                </svg>
+              </button>
+              <button class="view-btn" aria-label="Grid View">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="4" y="4" width="7" height="7" rx="1"></rect>
+                  <rect x="13" y="4" width="7" height="7" rx="1"></rect>
+                  <rect x="4" y="13" width="7" height="7" rx="1"></rect>
+                  <rect x="13" y="13" width="7" height="7" rx="1"></rect>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="work-header-right">
+            <div class="work-search">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" placeholder="Search...">
+            </div>
+            <div class="work-filters">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="branding">Branding</button>
+              <button class="filter-btn" data-filter="web">Web Design</button>
+              <button class="filter-btn" data-filter="print">Print</button>
+              <button class="filter-btn" data-filter="motion">Motion</button>
+            </div>
+          </div>
         </div>
 
         <div class="work-grid">
           <!-- Project 1 -->
           <div class="work-card scroll-reveal" data-category="branding web">
+            <div class="work-index">#1</div>
             <div class="work-thumb">
               <img
-                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='800' height='600' fill='%23e0e0e0'/></svg>"
-                alt="Project 1">
-              <div class="work-overlay">
-                <p>Complete brand identity and website redesign for a modern tech startup.</p>
-                <a href="#" class="view-project">View Project</a>
-              </div>
+                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='800' height='600' fill='%23111111'/></svg>"
+                alt="Lumina Tech Rebrand">
             </div>
             <div class="work-info">
-              <h3 class="work-title">Lumina Tech Rebrand</h3>
-              <span class="work-category">Branding, Web Design</span>
+              <div class="work-info-top">
+                <div class="work-info-header">
+                  <h3 class="work-title">Lumina Tech Rebrand</h3>
+                  <span class="work-year">2024</span>
+                </div>
+                <span class="work-category">Branding & Web Design</span>
+              </div>
+              <div class="work-tags">
+                <span class="work-tag">Identity</span>
+                <span class="work-tag">UI/UX</span>
+                <span class="work-tag">Development</span>
+              </div>
             </div>
           </div>
 
           <!-- Project 2 -->
           <div class="work-card scroll-reveal" data-category="web">
+            <div class="work-index">#2</div>
             <div class="work-thumb">
               <img
-                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='800' height='600' fill='%23d0d0d0'/></svg>"
-                alt="Project 2">
-              <div class="work-overlay">
-                <p>E-commerce platform with focus on conversion and user experience.</p>
-                <a href="#" class="view-project">View Project</a>
-              </div>
+                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='800' height='600' fill='%23111111'/></svg>"
+                alt="Aura E-Commerce">
             </div>
             <div class="work-info">
-              <h3 class="work-title">Aura E-Commerce</h3>
-              <span class="work-category">Web Design</span>
+              <div class="work-info-top">
+                <div class="work-info-header">
+                  <h3 class="work-title">Aura E-Commerce</h3>
+                  <span class="work-year">2023</span>
+                </div>
+                <span class="work-category">Web Design</span>
+              </div>
+              <div class="work-tags">
+                <span class="work-tag">E-Commerce</span>
+                <span class="work-tag">Conversion</span>
+              </div>
             </div>
           </div>
 
           <!-- Project 3 -->
           <div class="work-card scroll-reveal" data-category="print branding">
+            <div class="work-index">#3</div>
             <div class="work-thumb">
               <img
-                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='800' height='600' fill='%23c0c0c0'/></svg>"
-                alt="Project 3">
-              <div class="work-overlay">
-                <p>High-end editorial layout and packaging design.</p>
-                <a href="#" class="view-project">View Project</a>
-              </div>
+                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='800' height='600' fill='%23111111'/></svg>"
+                alt="Botanica Magazine">
             </div>
             <div class="work-info">
-              <h3 class="work-title">Botanica Magazine</h3>
-              <span class="work-category">Print, Branding</span>
+              <div class="work-info-top">
+                <div class="work-info-header">
+                  <h3 class="work-title">Botanica Magazine</h3>
+                  <span class="work-year">2023</span>
+                </div>
+                <span class="work-category">Print & Branding</span>
+              </div>
+              <div class="work-tags">
+                <span class="work-tag">Editorial</span>
+                <span class="work-tag">Typography</span>
+              </div>
             </div>
           </div>
 
           <!-- Project 4 -->
           <div class="work-card scroll-reveal" data-category="motion">
+            <div class="work-index">#4</div>
             <div class="work-thumb">
               <img
-                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='800' height='600' fill='%23e0e0e0'/></svg>"
-                alt="Project 4">
-              <div class="work-overlay">
-                <p>Engaging promotional video and animated assets.</p>
-                <a href="#" class="view-project">View Project</a>
-              </div>
+                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='800' height='600' fill='%23111111'/></svg>"
+                alt="Nexus Promo">
             </div>
             <div class="work-info">
-              <h3 class="work-title">Nexus Promo</h3>
-              <span class="work-category">Motion</span>
+              <div class="work-info-top">
+                <div class="work-info-header">
+                  <h3 class="work-title">Nexus Promo</h3>
+                  <span class="work-year">2025</span>
+                </div>
+                <span class="work-category">Motion</span>
+              </div>
+              <div class="work-tags">
+                <span class="work-tag">Animation & VFX</span>
+                <span class="work-tag">Post-Production</span>
+              </div>
             </div>
           </div>
         </div>

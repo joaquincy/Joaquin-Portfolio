@@ -35,6 +35,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Work section view toggle
+  const viewBtns = document.querySelectorAll('.view-btn');
+  const workGrid = document.querySelector('.work-grid');
+
+  if (viewBtns.length && workGrid) {
+    viewBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        viewBtns.forEach(b => b.classList.remove('active'));
+        // Add active class to clicked button
+        btn.classList.add('active');
+
+        // Get view type and update grid class
+        const viewType = btn.getAttribute('data-view');
+
+        // Remove existing view classes
+        workGrid.classList.remove('view-slider', 'view-list', 'view-grid');
+
+        // Add new view class
+        if (viewType) {
+          workGrid.classList.add(`view-${viewType}`);
+        }
+      });
+    });
+  }
+
   // Contact Form Submission (Mock API for now)
   const contactForm = document.getElementById('contact-form');
   const formStatus = document.getElementById('form-status');

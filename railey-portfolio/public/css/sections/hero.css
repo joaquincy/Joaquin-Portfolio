@@ -6,7 +6,7 @@
   padding-top: 80px;
   overflow: hidden;
   position: relative;
-  background-color: #f7f7f7;
+  background-color: var(--color-gray-light);
   /* Edgar's slightly off-white bg */
 }
 
@@ -121,7 +121,7 @@
   /* tighter column like Edgar */
   margin-bottom: var(--space-8);
   line-height: 1.65;
-  color: #444;
+  color: var(--color-gray-dark);
 }
 
 .hero-ctas {
@@ -140,7 +140,7 @@
   position: relative;
   border-radius: 4px;
   overflow: hidden;
-  background-color: #e8e8e8;
+  background-color: var(--color-subtle-border);
   max-width: 380px;
   /* contained, not full width */
   margin: 0 auto;
@@ -160,7 +160,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.12) 1px, transparent 1px);
+  background-image: radial-gradient(circle, var(--color-subtle-border) 1px, transparent 1px);
   background-size: 28px 28px;
   z-index: 0;
   pointer-events: none;
@@ -183,7 +183,7 @@
   font-family: 'Space Mono', monospace;
   font-size: clamp(3rem, 8vw, 7rem);
   font-weight: 700;
-  color: rgba(0, 0, 0, 0.04);
+  color: var(--color-nav-border);
   /* very faint */
   line-height: 1;
   user-select: none;
@@ -268,7 +268,7 @@
   font-family: 'Space Mono', monospace;
   font-size: 0.65rem;
   letter-spacing: 0.08em;
-  color: #000;
+  color: var(--color-black);
   animation: scrollBounce 2s ease-in-out infinite;
 }
 

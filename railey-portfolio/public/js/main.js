@@ -1,13 +1,60 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Dark Mode Toggle
+  const darkModeToggle = document.querySelector('.dark-mode-toggle');
+  const darkModeText = darkModeToggle ? darkModeToggle.querySelector('span') : null;
+
+  // Check local storage for theme
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-theme');
+    if (darkModeText) darkModeText.textContent = 'LIGHT';
+  }
+
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-theme');
+      
+      if (document.body.classList.contains('dark-theme')) {
+        localStorage.setItem('theme', 'dark');
+        if (darkModeText) darkModeText.textContent = 'LIGHT';
+      } else {
+        localStorage.setItem('theme', 'light');
+        if (darkModeText) darkModeText.textContent = 'DARK';
+      }
+    });
+  }
+
   // Set copyright year
   const yearElement = document.getElementById('year');
   if (yearElement) {
     yearElement.textContent = new Date().getFullYear();
   }
 
-  // Work section filtering
+  // Work section filtering and search
   const filterBtns = document.querySelectorAll('.filter-btn');
   const workCards = document.querySelectorAll('.work-card');
+  const searchInput = document.querySelector('.work-search input');
+
+  let currentFilter = 'all';
+  let currentSearch = '';
+
+  const updateWorkCards = () => {
+    workCards.forEach(card => {
+      const matchesFilter = currentFilter === 'all' || (card.getAttribute('data-category') || '').includes(currentFilter);
+      const matchesSearch = currentSearch === '' || card.textContent.toLowerCase().includes(currentSearch);
+
+      if (matchesFilter && matchesSearch) {
+        card.classList.remove('hide');
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'scale(1)';
+        }, 50);
+      } else {
+        card.classList.add('hide');
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.95)';
+      }
+    });
+  };
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -16,24 +63,17 @@ document.addEventListener('DOMContentLoaded', () => {
       // Add active class to clicked button
       btn.classList.add('active');
 
-      const filterValue = btn.getAttribute('data-filter');
-
-      workCards.forEach(card => {
-        if (filterValue === 'all' || card.getAttribute('data-category').includes(filterValue)) {
-          card.classList.remove('hide');
-          // small delay for layout calculation before triggering transition
-          setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'scale(1)';
-          }, 50);
-        } else {
-          card.classList.add('hide');
-          card.style.opacity = '0';
-          card.style.transform = 'scale(0.95)';
-        }
-      });
+      currentFilter = btn.getAttribute('data-filter');
+      updateWorkCards();
     });
   });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      currentSearch = e.target.value.toLowerCase();
+      updateWorkCards();
+    });
+  }
 
   // Work section view toggle
   const viewBtns = document.querySelectorAll('.view-btn');

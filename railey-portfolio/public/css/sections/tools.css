@@ -35,7 +35,7 @@
 
 .ring {
   position: absolute;
-  border: 1px dashed rgba(0, 0, 0, 0.1);
+  border: 1px dashed var(--color-subtle-border);
   border-radius: 50%;
   /* Optional: animation to rotate the rings slowly */
   animation: spin 60s linear infinite;

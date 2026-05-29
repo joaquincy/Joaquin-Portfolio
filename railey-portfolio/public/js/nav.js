@@ -4,43 +4,51 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelector('.nav-links');
   const navItems = document.querySelectorAll('.nav-links a');
 
-  let lastScroll = 0;
-
   // Smart Navigation (Hide on scroll down, show on up)
+  let ticking = false;
   window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const currentScroll = window.pageYOffset;
 
-    // Don't hide header if mobile menu is open
-    if (navLinks.classList.contains('open')) return;
-
-    // Add scrolled class when user scrolls past 80px (header height)
-    if (currentScroll > 80) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
+        // Don't hide header if mobile menu is open
+        if (!navLinks.classList.contains('open')) {
+          // Add scrolled class when user scrolls past 80px (header height)
+          if (currentScroll > 80) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
+        }
+        ticking = false;
+      });
+      ticking = true;
     }
+  }, { passive: true });
 
-    // Keep lastScroll updated if needed in future
-    lastScroll = currentScroll;
+  // Use IntersectionObserver for active link highlighting to avoid layout thrashing
+  const observerOptions = {
+    root: null,
+    rootMargin: '-30% 0px -70% 0px', // Trigger when section is in top part of viewport
+    threshold: 0
+  };
 
-    // Active link highlighting
-    let current = '';
-    const sections = document.querySelectorAll('section');
-
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
-        current = section.getAttribute('id');
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navItems.forEach(a => {
+          a.classList.remove('active');
+          if (a.getAttribute('href').includes(id)) {
+            a.classList.add('active');
+          }
+        });
       }
     });
+  }, observerOptions);
 
-    navItems.forEach(a => {
-      a.classList.remove('active');
-      if (a.getAttribute('href').includes(current)) {
-        a.classList.add('active');
-      }
-    });
+  document.querySelectorAll('section').forEach(section => {
+    sectionObserver.observe(section);
   });
 
   // Mobile Menu Toggle

@@ -1,9 +1,11 @@
-// server.js — zero dependencies, plain Node.js only
+// server.js — Local development server (not used by Vercel)
+require('dotenv').config(); // Load .env for local development
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
 const config = require('./config/api');
+const { chat } = require('./services/aiService');
 
 const PORT = config.server.port;
 
@@ -51,6 +53,23 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'OPTIONS') {
     res.writeHead(204);
     res.end();
+    return;
+  }
+
+  // --- API ROUTE: POST /api/groq ---
+  if (req.url === '/api/groq' && req.method === 'POST') {
+    try {
+      const body = JSON.parse(await readBody(req));
+      const userMessage = body.message || '';
+      const reply = await chat(userMessage);
+
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, reply }));
+    } catch (err) {
+      console.error('API error:', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, error: 'Server error' }));
+    }
     return;
   }
 

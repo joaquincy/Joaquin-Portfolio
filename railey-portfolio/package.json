@@ -2,5 +2,15 @@
   "name": "railey-portfolio",
   "version": "1.0.0",
   "description": "Railey Joaquin — Graphic Designer Portfolio",
-  "private": true
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.0",
+    "groq-sdk": "^0.12.0"
+  }
 }

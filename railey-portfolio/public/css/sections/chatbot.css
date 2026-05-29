@@ -11,6 +11,7 @@
     /* Aligns the window to the right side above the button */
     gap: 1rem;
     /* Space between the window and the toggle button */
+    pointer-events: none;
 }
 
 /* 2. The Toggle Button */
@@ -27,6 +28,7 @@
     justify-content: center;
     align-items: center;
     transition: transform 0.3s ease;
+    pointer-events: auto;
 }
 
 .chatbot-toggle:hover {
@@ -69,6 +71,7 @@
     transition: opacity 0.3s ease, transform 0.3s ease;
     transform-origin: bottom right;
     /* Animation grows from the button */
+    pointer-events: auto;
 }
 
 /* The state JavaScript will use to hide the window */
@@ -167,13 +170,13 @@
 
 .user-message {
     align-self: flex-end;
-    /* Pushes bubble to the right */
+}
+
+.user-message .message-bubble {
     background-color: var(--color-black);
     color: var(--color-white);
-    padding: 0.75rem 1rem;
-    border-radius: 12px;
+    border-bottom-left-radius: 12px;
     border-bottom-right-radius: 4px;
-    /* Makes the tail of the bubble */
 }
 
 /* 7. Input Area */

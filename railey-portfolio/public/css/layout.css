@@ -1,8 +1,13 @@
+html {
+  overflow-x: hidden;
+}
+
 body {
   /* Dashed grid background pattern */
   background-image: var(--color-grid-pattern);
   background-size: 60px 60px;
   position: relative;
+  overflow-x: hidden;
   /* For the fade overlay */
 }
 

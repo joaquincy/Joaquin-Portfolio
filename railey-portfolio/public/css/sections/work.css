@@ -93,23 +93,36 @@
 .work .container {
   position: relative;
   z-index: 1;
-  padding-left: 0;
 }
 
 /* Header Area */
 .work-header-area {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   margin-bottom: var(--space-12);
   padding-bottom: var(--space-6);
-  flex-wrap: wrap;
-  gap: var(--space-4);
+  gap: var(--space-6);
+}
+
+@media (min-width: 992px) {
+  .work-header-area {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .work-header-left {
   display: flex;
   align-items: center;
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .work-header-left {
+    width: auto;
+  }
 }
 
 .view-options {
@@ -146,9 +159,18 @@
 
 .work-header-right {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: var(--space-4);
-  flex-wrap: wrap;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .work-header-right {
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+  }
 }
 
 .work-search {
@@ -172,7 +194,13 @@
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   outline: none;
-  width: 150px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .work-search input {
+    width: 150px;
+  }
 }
 
 .work-search input::placeholder {
@@ -216,6 +244,7 @@
   gap: var(--space-6);
   transition: opacity 0.4s ease, transform 0.4s ease;
   width: 100%;
+  position: relative;
 }
 
 .work-card.hide {
@@ -269,7 +298,7 @@
 
 .work-title {
   font-family: var(--font-hero);
-  font-size: clamp(2rem, 4vw, 1.5rem);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
   text-transform: uppercase;
   margin: 0;
   line-height: 1.1;
@@ -312,37 +341,66 @@
   color: var(--color-gray-dark);
 }
 
-/* Desktop layout */
+/* Slider layout (default desktop view) */
 @media (min-width: 992px) {
-  .work-card {
+  .work-grid:not(.view-grid):not(.view-list) .work-card {
     flex-direction: row;
     align-items: stretch;
     gap: var(--space-8);
-    position: relative;
   }
 
-  .work-index {
+  .work-grid:not(.view-grid):not(.view-list) .work-index {
     order: 0;
-    /* makes it appear before the thumb (order: 1) */
     width: 30px;
     flex-shrink: 0;
     margin-top: var(--space-2);
   }
 
-  .work-thumb {
+  .work-grid:not(.view-grid):not(.view-list) .work-thumb {
     order: 1;
     flex: 0 0 55%;
     margin-bottom: 0;
   }
 
-  .work-info {
+  .work-grid:not(.view-grid):not(.view-list) .work-info {
     order: 2;
     flex: 1;
     padding-top: var(--space-2);
   }
 }
 
-/* Grid View Styles */
+/* Grid View Styles (All Sizes) */
+.work-grid.view-grid .work-card {
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.work-grid.view-grid .work-index {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: 2;
+  background: var(--color-white);
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin: 0;
+}
+
+.work-grid.view-grid .work-thumb {
+  width: 100%;
+  flex: none;
+  order: 0;
+}
+
+.work-grid.view-grid .work-info {
+  order: 1;
+  padding-top: 0;
+}
+
+.work-grid.view-grid .work-category {
+  margin-bottom: var(--space-4);
+}
+
 @media (min-width: 768px) {
   .work-grid.view-grid {
     display: grid;
@@ -350,56 +408,29 @@
     gap: var(--space-8);
   }
 
-  .work-grid.view-grid .work-card {
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .work-grid.view-grid .work-index {
-    position: absolute;
-    top: var(--space-4);
-    left: var(--space-4);
-    z-index: 2;
-    background: var(--color-white);
-    padding: 4px 8px;
-    border-radius: 4px;
-    margin: 0;
-  }
-
-  .work-grid.view-grid .work-thumb {
-    width: 100%;
-    flex: none;
-    order: 0;
-  }
-
-  .work-grid.view-grid .work-info {
-    order: 1;
-    padding-top: 0;
-  }
-
   .work-grid.view-grid .work-title {
     font-size: clamp(1.25rem, 2vw, 1.5rem);
-  }
-
-  .work-grid.view-grid .work-category {
-    margin-bottom: var(--space-4);
   }
 }
 
 /* List View Styles */
-@media (min-width: 992px) {
-  .work-grid.view-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
+.work-grid.view-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
 
+.work-grid.view-list .work-card {
+  border-bottom: 1px solid var(--color-subtle-border);
+  padding-bottom: var(--space-6);
+}
+
+@media (min-width: 768px) {
   .work-grid.view-list .work-card {
     flex-direction: row;
     align-items: center;
     gap: var(--space-6);
     padding-bottom: var(--space-4);
-    border-bottom: 1px solid var(--color-subtle-border);
   }
 
   .work-grid.view-list .work-index {

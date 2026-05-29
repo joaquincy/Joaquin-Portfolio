@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (darkModeToggle) {
     darkModeToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark-theme');
-      
+
       if (document.body.classList.contains('dark-theme')) {
         localStorage.setItem('theme', 'dark');
         if (darkModeText) darkModeText.textContent = 'LIGHT';
@@ -137,5 +137,65 @@ document.addEventListener('DOMContentLoaded', () => {
         btnLoader.style.display = 'none';
       }
     });
+  }
+
+  // Testimonials Auto-scroll Carousel (Infinite Loop)
+  const testimonialsScroll = document.querySelector('.testimonials-scroll');
+  if (testimonialsScroll) {
+    const cards = Array.from(testimonialsScroll.children);
+
+    // Calculate the width of one original set of cards, including the gap.
+    // We can do this by measuring the distance from the first card's left edge to the last card's right edge + one gap.
+    const gap = 20; // 20px gap from CSS
+    let originalSetWidth = 0;
+    cards.forEach(card => {
+      originalSetWidth += card.offsetWidth + gap;
+    });
+
+    // Clone the cards multiple times to ensure we have plenty of runway even on ultra-wide screens
+    for (let i = 0; i < 4; i++) {
+      cards.forEach(card => {
+        const clone = card.cloneNode(true);
+        testimonialsScroll.appendChild(clone);
+      });
+    }
+
+    let scrollSpeed = 1;
+    let isHovered = false;
+    let animationId;
+
+    const scroll = () => {
+      if (!isHovered) {
+        testimonialsScroll.scrollLeft += scrollSpeed;
+
+        // Reset seamlessly when we've scrolled exactly one original set's width
+        if (testimonialsScroll.scrollLeft >= originalSetWidth) {
+          testimonialsScroll.scrollLeft -= originalSetWidth;
+        }
+      }
+      animationId = requestAnimationFrame(scroll);
+    };
+
+    testimonialsScroll.addEventListener('mouseenter', () => {
+      isHovered = true;
+    });
+
+    testimonialsScroll.addEventListener('mouseleave', () => {
+      isHovered = false;
+    });
+
+    // Handle touch devices
+    testimonialsScroll.addEventListener('touchstart', () => {
+      isHovered = true;
+    });
+
+    testimonialsScroll.addEventListener('touchend', () => {
+      // Resume scroll after a small delay on touch end
+      setTimeout(() => {
+        isHovered = false;
+      }, 1000);
+    });
+
+    scroll();
   }
 });

@@ -179,22 +179,6 @@ body.dark-theme .testimonial-card {
   border: 1px solid var(--color-subtle-border);
 }
 
-body.dark-theme .quote-icon {
-  color: var(--color-white);
-}
-
-body.dark-theme .testimonial-rating .score {
-  color: var(--color-white);
-}
-
-body.dark-theme .testimonial-quote {
-  color: var(--color-white);
-}
-
-body.dark-theme .author-name {
-  color: var(--color-white);
-}
-
 @media (min-width: 768px) {
   .testimonial-card {
     width: 350px;

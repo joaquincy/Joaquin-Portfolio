@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Contact Form Submission (Mock API for now)
+  // Contact Form Submission (Web3Forms API)
   const contactForm = document.getElementById('contact-form');
   const formStatus = document.getElementById('form-status');
   const btnText = document.querySelector('.btn-text');
@@ -121,13 +121,27 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = Object.fromEntries(formData.entries());
 
       try {
-        // Simulate network request delay (Mock API)
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        // Add Web3Forms access key
+        data.access_key = '0ec2646b-b85a-4414-9b21-8d41834a7876';
 
-        // Display success message
-        formStatus.textContent = "Thank you! Your message has been sent successfully.";
-        formStatus.className = 'form-status mt-4 success';
-        contactForm.reset();
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.status === 200) {
+          formStatus.textContent = "Thank you! Your message has been sent successfully.";
+          formStatus.className = 'form-status mt-4 success';
+          contactForm.reset();
+        } else {
+          throw new Error(result.message || 'Something went wrong');
+        }
       } catch (error) {
         formStatus.textContent = "Oops! Something went wrong. Please try again later.";
         formStatus.className = 'form-status mt-4 error';

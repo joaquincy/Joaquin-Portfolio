@@ -24,9 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatbotForm = document.getElementById('chatbot-form');
     const chatbotInput = document.getElementById('chatbot-input');
     const chatbotMessages = document.getElementById('chatbot-messages');
-    
+
     // Flag to prevent spamming
     let isWaitingForResponse = false;
+
+    // Hard limit: 10 messages per day
+    const MAX_MESSAGES_PER_DAY = 20;
 
     // Helper to add a message to the chat window
     function addMessage(text, sender) {
@@ -39,6 +42,27 @@ document.addEventListener('DOMContentLoaded', () => {
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
     }
 
+    // Helper to check and update rate limits
+    function checkRateLimit() {
+        const today = new Date().toLocaleDateString();
+        const storedData = JSON.parse(localStorage.getItem('chatRateLimit')) || { date: today, count: 0 };
+
+        // Reset if it's a new day
+        if (storedData.date !== today) {
+            storedData.date = today;
+            storedData.count = 0;
+        }
+
+        if (storedData.count >= MAX_MESSAGES_PER_DAY) {
+            return false; // Limit exceeded
+        }
+
+        // Increment count and save
+        storedData.count += 1;
+        localStorage.setItem('chatRateLimit', JSON.stringify(storedData));
+        return true;
+    }
+
     // 4. Handle Chat Submission
     chatbotForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -48,6 +72,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const userText = chatbotInput.value.trim();
         if (!userText) return;
+
+        // Check if user has exceeded their daily limit
+        if (!checkRateLimit()) {
+            addMessage("You've reached the maximum number of messages for today! Please email me directly if you'd like to chat further.", 'ai');
+            chatbotInput.disabled = true;
+            chatbotInput.placeholder = "Daily limit reached.";
+            return;
+        }
 
         // Lock the chat to prevent spam
         isWaitingForResponse = true;

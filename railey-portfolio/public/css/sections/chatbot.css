@@ -18,8 +18,8 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: var(--text-main, #fff);
-    color: var(--bg-dark, #111);
+    background-color: var(--color-black);
+    color: var(--color-white);
     border: none;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -33,13 +33,26 @@
     transform: scale(1.05);
 }
 
+.chatbot-toggle .close-icon {
+    display: none;
+}
+
+.chatbot-toggle.is-open .chat-icon {
+    display: none;
+}
+
+.chatbot-toggle.is-open .close-icon {
+    display: block;
+}
+
 /* 3. The Chat Window */
 .chatbot-window {
     width: 350px;
     height: 500px;
     max-height: calc(100vh - 120px);
-    background-color: var(--bg-dark, #111);
-    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border: 1px solid var(--color-subtle-border);
     border-radius: 12px;
     overflow: hidden;
     /* Keeps header and input inside the rounded corners */
@@ -62,8 +75,8 @@
 /* 4. Header Area */
 .chatbot-header {
     padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+    background-color: var(--color-subtle-bg);
+    border-bottom: 1px solid var(--color-subtle-border);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -77,9 +90,16 @@
 .chatbot-close {
     background: none;
     border: none;
-    color: var(--text-muted, #888);
-    font-size: 1.5rem;
+    color: var(--color-gray-dark);
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+}
+
+.chatbot-close:hover {
+    color: var(--color-black);
 }
 
 /* 5. Messages Area */
@@ -106,7 +126,8 @@
 .ai-message {
     align-self: flex-start;
     /* Pushes bubble to the left */
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--color-subtle-bg);
+    color: var(--color-black);
     border-bottom-left-radius: 4px;
     /* Makes the tail of the bubble */
 }
@@ -114,8 +135,8 @@
 .user-message {
     align-self: flex-end;
     /* Pushes bubble to the right */
-    background-color: var(--text-main, #fff);
-    color: var(--bg-dark, #000);
+    background-color: var(--color-black);
+    color: var(--color-white);
     border-bottom-right-radius: 4px;
     /* Makes the tail of the bubble */
 }
@@ -124,8 +145,8 @@
 .chatbot-form {
     display: flex;
     padding: 1rem;
-    border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
-    background-color: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid var(--color-subtle-border);
+    background-color: var(--color-subtle-bg);
 }
 
 #chatbot-input {
@@ -142,7 +163,7 @@
 .chatbot-send {
     background: none;
     border: none;
-    color: var(--text-main, #fff);
+    color: var(--color-black);
     cursor: pointer;
     display: flex;
     align-items: center;

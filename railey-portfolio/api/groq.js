@@ -1,6 +1,6 @@
 // api/groq.js — Vercel Serverless Function for the Groq API Endpoint
 
-const { chat } = require('../services/groq');
+const { chat } = require('../services/aiService');
 
 module.exports = async function handler(req, res) {
   // Allow preflight OPTIONS requests for CORS (Vercel usually handles this, but it's safe to have)
@@ -16,7 +16,7 @@ module.exports = async function handler(req, res) {
   try {
     // Vercel automatically parses the JSON body, so req.body is already an object
     const userMessage = req.body.message || '';
-    
+
     // Call the Groq service
     const reply = await chat(userMessage);
 

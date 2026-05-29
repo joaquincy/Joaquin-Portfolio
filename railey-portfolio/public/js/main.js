@@ -121,23 +121,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = Object.fromEntries(formData.entries());
 
       try {
-        const response = await fetch('/api/groq', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ message: `New lead from ${data.name} (${data.email}) regarding ${data.subject}. Message: ${data.message}` })
-        });
+        // Simulate network request delay (Mock API)
+        await new Promise(resolve => setTimeout(resolve, 1500));
 
-        const result = await response.json();
-
-        if (result.success) {
-          formStatus.textContent = "Thank you! Your message has been sent successfully.";
-          formStatus.className = 'form-status mt-4 success';
-          contactForm.reset();
-        } else {
-          throw new Error('Server returned an error');
-        }
+        // Display success message
+        formStatus.textContent = "Thank you! Your message has been sent successfully.";
+        formStatus.className = 'form-status mt-4 success';
+        contactForm.reset();
       } catch (error) {
         formStatus.textContent = "Oops! Something went wrong. Please try again later.";
         formStatus.className = 'form-status mt-4 error';

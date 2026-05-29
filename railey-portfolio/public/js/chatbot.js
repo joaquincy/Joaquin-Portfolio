@@ -24,6 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatbotForm = document.getElementById('chatbot-form');
     const chatbotInput = document.getElementById('chatbot-input');
     const chatbotMessages = document.getElementById('chatbot-messages');
+    
+    // Flag to prevent spamming
+    let isWaitingForResponse = false;
 
     // Helper to add a message to the chat window
     function addMessage(text, sender) {
@@ -40,8 +43,15 @@ document.addEventListener('DOMContentLoaded', () => {
     chatbotForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
+        // If we are already waiting for a response, completely ignore any new attempts to send
+        if (isWaitingForResponse) return;
+
         const userText = chatbotInput.value.trim();
         if (!userText) return;
+
+        // Lock the chat to prevent spam
+        isWaitingForResponse = true;
+        chatbotInput.disabled = true;
 
         // Add user message to UI
         addMessage(userText, 'user');
@@ -75,6 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (err) {
             chatbotMessages.removeChild(loadingDiv);
             addMessage("Network error. Please try again.", 'ai');
+        } finally {
+            // Unlock the chat so the user can send another message
+            isWaitingForResponse = false;
+            chatbotInput.disabled = false;
+            chatbotInput.focus();
         }
     });
 

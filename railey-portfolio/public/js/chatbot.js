@@ -36,7 +36,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const msgDiv = document.createElement('div');
         msgDiv.classList.add('message');
         msgDiv.classList.add(sender === 'user' ? 'user-message' : 'ai-message');
-        msgDiv.textContent = text;
+
+        if (sender === 'ai') {
+            const avatar = document.createElement('img');
+            avatar.src = '/assets/images/picture.png';
+            avatar.alt = 'Railey';
+            avatar.classList.add('message-avatar');
+            msgDiv.appendChild(avatar);
+        }
+
+        const bubble = document.createElement('div');
+        bubble.classList.add('message-bubble');
+        bubble.textContent = text;
+        msgDiv.appendChild(bubble);
+
         chatbotMessages.appendChild(msgDiv);
         // Scroll to the bottom
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
@@ -92,7 +105,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show loading bubble
         const loadingDiv = document.createElement('div');
         loadingDiv.classList.add('message', 'ai-message', 'loading');
-        loadingDiv.textContent = 'Typing...';
+
+        const avatar = document.createElement('img');
+        avatar.src = '/assets/images/picture.png';
+        avatar.alt = 'Railey';
+        avatar.classList.add('message-avatar');
+        loadingDiv.appendChild(avatar);
+
+        const bubble = document.createElement('div');
+        bubble.classList.add('message-bubble');
+        bubble.textContent = 'Typing...';
+        loadingDiv.appendChild(bubble);
+
         chatbotMessages.appendChild(loadingDiv);
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 

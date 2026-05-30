@@ -140,19 +140,50 @@
   position: relative;
   border-radius: 4px;
   overflow: hidden;
-  background-color: var(--color-subtle-border);
+  background-color: var(--color-white);
   max-width: 380px;
   /* contained, not full width */
   margin: 0 auto;
   aspect-ratio: 3/4;
 }
 
-.image-box img {
+.image-box img.base-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top center;
   display: block;
+}
+
+/* ── Interactive SVG Overlay ── */
+.hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.art-part {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  /* Let the trigger shape catch the mouse */
+}
+
+.hover-trigger {
+  cursor: crosshair;
+  /* Adds an artistic/interactive feel */
+  /* Do not add pointer-events: none here, we need it to trigger hover! */
+}
+
+/* When the specific body part group is hovered, reveal its art part */
+/* We use (hover: hover) so this effect is COMPLETELY disabled on mobile/touch screens */
+@media (hover: hover) and (pointer: fine) {
+  .body-part-group:hover .art-part {
+    opacity: 1;
+  }
 }
 
 /* ── DOT GRID background (like Edgar's) ── */

@@ -130,9 +130,70 @@
         </div>
 
         <div class="hero-image animate-fade-in" style="--delay: 0.4s">
-          <div class="image-box">
-            <img src="/assets/images/railey-photo.png" alt="Railey Joaquin"
+          <div class="image-box" id="hero-image-box">
+            <!-- Base Image -->
+            <img src="/assets/images/railey-photo.png" alt="Railey Joaquin" class="base-image"
               onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'800\'><rect width=\'600\' height=\'800\' fill=\'%23f5f5f5\'/></svg>'">
+
+            <!-- SVG Interactive Overlay -->
+            <svg class="hover-overlay" viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <!-- Rough coordinates for body parts based on a 600x800 aspect ratio -->
+                <clipPath id="clip-head">
+                  <path
+                    d="M 220 80 C 300 30, 380 80, 400 200 C 420 300, 350 350, 300 350 C 250 350, 180 300, 200 200 Z" />
+                </clipPath>
+                <clipPath id="clip-left-arm">
+                  <polygon points="100,320 220,320 200,600 20,600" />
+                </clipPath>
+                <clipPath id="clip-right-arm">
+                  <polygon points="380,320 500,320 580,600 400,600" />
+                </clipPath>
+                <clipPath id="clip-torso">
+                  <polygon points="220,320 380,320 400,600 200,600" />
+                </clipPath>
+                <clipPath id="clip-legs">
+                  <polygon points="20,600 580,600 580,800 20,800" />
+                </clipPath>
+              </defs>
+
+              <!-- Head -->
+              <g class="body-part-group">
+                <image href="/assets/images/railey-photo-art.png" class="art-part" clip-path="url(#clip-head)"
+                  width="600" height="800" />
+                <path class="hover-trigger"
+                  d="M 220 80 C 300 30, 380 80, 400 200 C 420 300, 350 350, 300 350 C 250 350, 180 300, 200 200 Z"
+                  fill="transparent" />
+              </g>
+
+              <!-- Left Arm -->
+              <g class="body-part-group">
+                <image href="/assets/images/railey-photo-art.png" class="art-part" clip-path="url(#clip-left-arm)"
+                  width="600" height="800" />
+                <polygon class="hover-trigger" points="100,320 220,320 200,600 20,600" fill="transparent" />
+              </g>
+
+              <!-- Right Arm -->
+              <g class="body-part-group">
+                <image href="/assets/images/railey-photo-art.png" class="art-part" clip-path="url(#clip-right-arm)"
+                  width="600" height="800" />
+                <polygon class="hover-trigger" points="380,320 500,320 580,600 400,600" fill="transparent" />
+              </g>
+
+              <!-- Torso & Hands -->
+              <g class="body-part-group">
+                <image href="/assets/images/railey-photo-art.png" class="art-part" clip-path="url(#clip-torso)"
+                  width="600" height="800" />
+                <polygon class="hover-trigger" points="220,320 380,320 400,600 200,600" fill="transparent" />
+              </g>
+
+              <!-- Legs -->
+              <g class="body-part-group">
+                <image href="/assets/images/railey-photo-art.png" class="art-part" clip-path="url(#clip-legs)"
+                  width="600" height="800" />
+                <polygon class="hover-trigger" points="20,600 580,600 580,800 20,800" fill="transparent" />
+              </g>
+            </svg>
           </div>
         </div>
       </div>

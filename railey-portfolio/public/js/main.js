@@ -212,4 +212,126 @@ document.addEventListener('DOMContentLoaded', () => {
 
     scroll();
   }
+
+  // --- Modal Logic ---
+  
+  // Dummy data for projects. Replace with your actual project content!
+  const projectData = {
+    "1": {
+      title: "Siomai Street Website",
+      category: "Branding & Web Design",
+      description: "A complete rebranding and website redesign for Siomai Street, focusing on improving user engagement and modernizing their digital presence.",
+      images: [
+        "/assets/images/Contemporary-world.webp",
+        "/assets/images/WebsiteView.webp"
+      ]
+    },
+    "2": {
+      title: "The Contemporary World",
+      category: "Web Design",
+      description: "An e-commerce platform built for The Contemporary World, optimizing conversion rates and providing a seamless shopping experience.",
+      images: [
+        "/assets/images/Contemporary-world.webp"
+      ]
+    },
+    "3": {
+      title: "E-Nazareno Website",
+      category: "Print & Branding",
+      description: "Editorial layout and typography for the E-Nazareno project, bringing physical aesthetics into a digital format.",
+      images: [
+        "/assets/images/Contemporary-world.webp"
+      ]
+    },
+    "4": {
+      title: "Nexus Promo",
+      category: "Motion",
+      description: "A promotional motion graphics campaign for Nexus, designed to capture attention quickly on social media platforms.",
+      images: [
+        "/assets/images/Contemporary-world.webp"
+      ]
+    }
+  };
+
+  // Fetch the modal HTML template and inject it into the page
+  fetch('/modal.html')
+    .then(response => response.text())
+    .then(html => {
+      // Append modal HTML to body
+      document.body.insertAdjacentHTML('beforeend', html);
+      
+      const modal = document.getElementById('workModal');
+      const closeBtn = document.querySelector('.work-modal-close');
+      
+      const modalTitle = document.getElementById('modalTitle');
+      const modalCategory = document.getElementById('modalCategory');
+      const modalDescription = document.getElementById('modalDescription');
+      const modalGallery = document.getElementById('modalGallery');
+      
+      // Function to close modal
+      const closeModal = () => {
+        modal.classList.remove('active');
+        document.body.classList.remove('modal-open');
+        // Wait for transition to finish before clearing content (optional)
+        setTimeout(() => {
+          modalGallery.innerHTML = '';
+        }, 300);
+      };
+      
+      // Add event listeners for closing
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          // Close if clicking the overlay background itself (not the content)
+          if (e.target === modal) {
+            closeModal();
+          }
+        });
+      }
+      
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+          closeModal();
+        }
+      });
+      
+      // Add click event to work cards
+      const allWorkCards = document.querySelectorAll('.work-card');
+      allWorkCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const projectId = card.getAttribute('data-project-id');
+          if (!projectId || !projectData[projectId] || !modal) return;
+          
+          const data = projectData[projectId];
+          
+          // Populate text data
+          modalTitle.textContent = data.title;
+          modalCategory.textContent = data.category;
+          modalDescription.innerHTML = `<p>${data.description}</p>`;
+          
+          // Populate images
+          modalGallery.innerHTML = '';
+          data.images.forEach(imgSrc => {
+            const img = document.createElement('img');
+            img.src = imgSrc;
+            img.alt = data.title;
+            img.loading = 'lazy'; // Performance optimization
+            
+            // Add animation class when image loads
+            img.onload = () => {
+              img.classList.add('loaded');
+            };
+            
+            modalGallery.appendChild(img);
+          });
+          
+          // Show the modal
+          modal.classList.add('active');
+          document.body.classList.add('modal-open');
+        });
+      });
+      
+    })
+    .catch(err => console.error('Error loading modal:', err));
+
 });

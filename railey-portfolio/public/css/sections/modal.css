@@ -263,6 +263,7 @@ body.dark-theme .work-modal-content {
   }
 }
 
+html.modal-open,
 body.modal-open {
   overflow: hidden;
 }

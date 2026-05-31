@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: "Branding & Web Design",
       description: "A complete rebranding and website redesign for Siomai Street, focusing on improving user engagement and modernizing their digital presence.",
       images: [
-        "/assets/images/Contemporary-world.webp",
+        "/assets/images/SiomaiStreet.webp",
         "/assets/images/WebsiteView.webp"
       ]
     },
@@ -436,6 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const closeModal = () => {
         modal.classList.remove('active');
         document.body.classList.remove('modal-open');
+        document.documentElement.classList.remove('modal-open');
         setTimeout(() => {
           if (modalMainImage) modalMainImage.src = '';
           if (modalThumbnails) modalThumbnails.innerHTML = '';
@@ -482,6 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // Show the modal
           modal.classList.add('active');
           document.body.classList.add('modal-open');
+          document.documentElement.classList.add('modal-open');
         });
       });
 

@@ -105,6 +105,58 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, { passive: true });
   }
+
+  // 4. Timeline Scroll Progress — lightweight rAF-based
+  const timeline = document.querySelector('.experience-timeline');
+  if (timeline) {
+    let timelineTicking = false;
+
+    const updateTimelineProgress = () => {
+      const rect = timeline.getBoundingClientRect();
+      const windowH = window.innerHeight;
+
+      // Calculate start and end points for the fill animation.
+      // We want the line to start filling when the top of the timeline is near the middle of the screen
+      // and finish when the bottom of the timeline reaches the middle of the screen.
+      const startPos = windowH * 0.6; // 60% down the screen
+
+      const totalHeight = rect.height;
+      const scrolledPastStart = startPos - rect.top;
+
+      let progress = 0;
+      if (scrolledPastStart > 0) {
+        progress = scrolledPastStart / totalHeight;
+      }
+
+      // Clamp between 0 and 1
+      progress = Math.max(0, Math.min(1, progress));
+
+      timeline.style.setProperty('--timeline-progress', progress);
+
+      // Optional: Light up nodes as the line reaches them
+      const nodes = timeline.querySelectorAll('.timeline-node');
+      nodes.forEach(node => {
+        const nodeRect = node.getBoundingClientRect();
+        if (nodeRect.top < startPos) {
+          node.classList.add('active');
+        } else {
+          node.classList.remove('active');
+        }
+      });
+
+      timelineTicking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!timelineTicking) {
+        requestAnimationFrame(updateTimelineProgress);
+        timelineTicking = true;
+      }
+    }, { passive: true });
+
+    // Initial call
+    updateTimelineProgress();
+  }
 });
 
 // ── Text Scramble Effect ─────────────────────────────────────

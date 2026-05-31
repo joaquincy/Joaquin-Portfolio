@@ -2,16 +2,40 @@
   <div class="work-modal-content">
     <button class="work-modal-close" aria-label="Close modal">&times;</button>
     <div class="work-modal-body">
-      <div class="work-modal-header">
-        <h2 class="work-modal-title" id="modalTitle">Project Title</h2>
-        <span class="work-modal-category" id="modalCategory">Category</span>
+
+      <!-- Image Carousel Area -->
+      <div class="modal-carousel-container">
+        <div class="modal-main-image-wrapper">
+          <button class="modal-nav-btn prev" id="modalPrevBtn" aria-label="Previous image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <img id="modalMainImage" src="" alt="Project Image" loading="lazy">
+          <button class="modal-nav-btn next" id="modalNextBtn" aria-label="Next image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-thumbnails" id="modalThumbnails">
+          <!-- Thumbnails injected via JS -->
+        </div>
       </div>
-      <div class="work-modal-description" id="modalDescription">
-        <p>Project description goes here...</p>
+
+      <!-- Text Content Area -->
+      <div class="modal-text-container">
+        <div class="work-modal-header">
+          <span class="work-modal-category" id="modalCategory">Category</span>
+          <h2 class="work-modal-title" id="modalTitle">Project Title</h2>
+        </div>
+        <div class="work-modal-description" id="modalDescription">
+          <p>Project description goes here...</p>
+        </div>
       </div>
-      <div class="work-modal-gallery" id="modalGallery">
-        <!-- Images will be injected here -->
-      </div>
+
     </div>
   </div>
 </div>

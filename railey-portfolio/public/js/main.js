@@ -373,15 +373,72 @@ document.addEventListener('DOMContentLoaded', () => {
       const modalTitle = document.getElementById('modalTitle');
       const modalCategory = document.getElementById('modalCategory');
       const modalDescription = document.getElementById('modalDescription');
-      const modalGallery = document.getElementById('modalGallery');
+
+      const modalMainImage = document.getElementById('modalMainImage');
+      const modalPrevBtn = document.getElementById('modalPrevBtn');
+      const modalNextBtn = document.getElementById('modalNextBtn');
+      const modalThumbnails = document.getElementById('modalThumbnails');
+
+      let currentImages = [];
+      let currentImageIndex = 0;
+
+      const updateGallery = () => {
+        if (!currentImages || currentImages.length === 0) return;
+
+        // Setup main image
+        modalMainImage.style.opacity = '0'; // For transition effect
+        setTimeout(() => {
+          modalMainImage.src = currentImages[currentImageIndex];
+          modalMainImage.onload = () => { modalMainImage.style.opacity = '1'; };
+        }, 150);
+
+        // Setup thumbnails
+        modalThumbnails.innerHTML = '';
+        if (currentImages.length > 1) {
+          modalThumbnails.style.display = 'flex';
+          currentImages.forEach((imgSrc, index) => {
+            const thumb = document.createElement('img');
+            thumb.src = imgSrc;
+            thumb.alt = `Thumbnail ${index + 1}`;
+            thumb.className = 'modal-thumbnail' + (index === currentImageIndex ? ' active' : '');
+            thumb.loading = 'lazy';
+            thumb.addEventListener('click', () => {
+              currentImageIndex = index;
+              updateGallery();
+            });
+            modalThumbnails.appendChild(thumb);
+          });
+
+          if (modalPrevBtn) modalPrevBtn.style.display = 'flex';
+          if (modalNextBtn) modalNextBtn.style.display = 'flex';
+        } else {
+          modalThumbnails.style.display = 'none';
+          if (modalPrevBtn) modalPrevBtn.style.display = 'none';
+          if (modalNextBtn) modalNextBtn.style.display = 'none';
+        }
+      };
+
+      if (modalPrevBtn) {
+        modalPrevBtn.addEventListener('click', () => {
+          currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+          updateGallery();
+        });
+      }
+
+      if (modalNextBtn) {
+        modalNextBtn.addEventListener('click', () => {
+          currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+          updateGallery();
+        });
+      }
 
       // Function to close modal
       const closeModal = () => {
         modal.classList.remove('active');
         document.body.classList.remove('modal-open');
-        // Wait for transition to finish before clearing content (optional)
         setTimeout(() => {
-          modalGallery.innerHTML = '';
+          if (modalMainImage) modalMainImage.src = '';
+          if (modalThumbnails) modalThumbnails.innerHTML = '';
         }, 300);
       };
 
@@ -413,25 +470,14 @@ document.addEventListener('DOMContentLoaded', () => {
           const data = projectData[projectId];
 
           // Populate text data
-          modalTitle.textContent = data.title;
-          modalCategory.textContent = data.category;
-          modalDescription.innerHTML = `<p>${data.description}</p>`;
+          if (modalTitle) modalTitle.textContent = data.title;
+          if (modalCategory) modalCategory.textContent = data.category;
+          if (modalDescription) modalDescription.innerHTML = `<p>${data.description}</p>`;
 
-          // Populate images
-          modalGallery.innerHTML = '';
-          data.images.forEach(imgSrc => {
-            const img = document.createElement('img');
-            img.src = imgSrc;
-            img.alt = data.title;
-            img.loading = 'lazy'; // Performance optimization
-
-            // Add animation class when image loads
-            img.onload = () => {
-              img.classList.add('loaded');
-            };
-
-            modalGallery.appendChild(img);
-          });
+          // Initialize gallery
+          currentImages = data.images || [];
+          currentImageIndex = 0;
+          updateGallery();
 
           // Show the modal
           modal.classList.add('active');

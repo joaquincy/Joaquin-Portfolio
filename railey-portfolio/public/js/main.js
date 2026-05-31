@@ -36,25 +36,73 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let currentFilter = 'all';
   let currentSearch = '';
+  let viewAllWorks = false;
+  const initialVisibleCount = 4;
+  const viewAllWorksBtn = document.getElementById('view-all-works-btn');
 
   const updateWorkCards = () => {
+    let visibleCount = 0;
+
+    // First, count how many would match the filter/search overall
+    let totalMatching = 0;
+    workCards.forEach(card => {
+      const matchesFilter = currentFilter === 'all' || (card.getAttribute('data-category') || '').includes(currentFilter);
+      const matchesSearch = currentSearch === '' || card.textContent.toLowerCase().includes(currentSearch);
+      if (matchesFilter && matchesSearch) totalMatching++;
+    });
+
     workCards.forEach(card => {
       const matchesFilter = currentFilter === 'all' || (card.getAttribute('data-category') || '').includes(currentFilter);
       const matchesSearch = currentSearch === '' || card.textContent.toLowerCase().includes(currentSearch);
 
       if (matchesFilter && matchesSearch) {
-        card.classList.remove('hide');
-        setTimeout(() => {
-          card.style.opacity = '1';
-          card.style.transform = 'scale(1)';
-        }, 50);
+        if (!viewAllWorks && visibleCount >= initialVisibleCount) {
+          card.classList.add('hide');
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.95)';
+        } else {
+          card.classList.remove('hide');
+          // Add a slight stagger to the reveal
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+          }, 50 + (visibleCount % initialVisibleCount) * 50);
+          visibleCount++;
+        }
       } else {
         card.classList.add('hide');
         card.style.opacity = '0';
         card.style.transform = 'scale(0.95)';
       }
     });
+
+    if (viewAllWorksBtn) {
+      if (totalMatching <= initialVisibleCount) {
+        viewAllWorksBtn.style.display = 'none';
+      } else {
+        viewAllWorksBtn.style.display = 'inline-flex';
+        const btnText = viewAllWorksBtn.querySelector('.btn-text');
+        const chevron = viewAllWorksBtn.querySelector('.chevron-icon');
+        if (viewAllWorks) {
+          btnText.textContent = 'Show Less';
+          chevron.style.transform = 'rotate(180deg)';
+        } else {
+          btnText.textContent = 'View All Works';
+          chevron.style.transform = 'rotate(0deg)';
+        }
+      }
+    }
   };
+
+  if (viewAllWorksBtn) {
+    viewAllWorksBtn.addEventListener('click', () => {
+      viewAllWorks = !viewAllWorks;
+      updateWorkCards();
+    });
+  }
+
+  // Initial call to set correct visibility
+  updateWorkCards();
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -214,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Modal Logic ---
-  
+
   // Dummy data for projects. Replace with your actual project content!
   const projectData = {
     "1": {
@@ -249,6 +297,66 @@ document.addEventListener('DOMContentLoaded', () => {
       images: [
         "/assets/images/Contemporary-world.webp"
       ]
+    },
+    "5": {
+      title: "Placeholder Project 5",
+      category: "Branding",
+      description: "This is a placeholder description for project 5.",
+      images: ["/assets/images/Contemporary-world.webp"]
+    },
+    "6": {
+      title: "Placeholder Project 6",
+      category: "Web Design",
+      description: "This is a placeholder description for project 6.",
+      images: ["/assets/images/Contemporary-world.webp"]
+    },
+    "7": {
+      title: "Placeholder Project 7",
+      category: "Print",
+      description: "This is a placeholder description for project 7.",
+      images: ["/assets/images/Contemporary-world.webp"]
+    },
+    "8": {
+      title: "Placeholder Project 8",
+      category: "Motion",
+      description: "This is a placeholder description for project 8.",
+      images: ["/assets/images/Contemporary-world.webp"]
+    },
+    "9": {
+      title: "Placeholder Project 9",
+      category: "Branding & Web",
+      description: "This is a placeholder description for project 9.",
+      images: ["/assets/images/Contemporary-world.webp"]
+    },
+    "10": {
+      title: "Placeholder Project 10",
+      category: "Print",
+      description: "This is a placeholder description for project 10.",
+      images: ["/assets/images/Contemporary-world.webp"]
+    },
+    "11": {
+      title: "Placeholder Project 11",
+      category: "Web Design",
+      description: "This is a placeholder description for project 11.",
+      images: ["/assets/images/Contemporary-world.webp"]
+    },
+    "12": {
+      title: "Placeholder Project 12",
+      category: "Motion",
+      description: "This is a placeholder description for project 12.",
+      images: ["/assets/images/Contemporary-world.webp"]
+    },
+    "13": {
+      title: "Placeholder Project 13",
+      category: "Branding",
+      description: "This is a placeholder description for project 13.",
+      images: ["/assets/images/Contemporary-world.webp"]
+    },
+    "14": {
+      title: "Placeholder Project 14",
+      category: "Web Design",
+      description: "This is a placeholder description for project 14.",
+      images: ["/assets/images/Contemporary-world.webp"]
     }
   };
 
@@ -258,15 +366,15 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(html => {
       // Append modal HTML to body
       document.body.insertAdjacentHTML('beforeend', html);
-      
+
       const modal = document.getElementById('workModal');
       const closeBtn = document.querySelector('.work-modal-close');
-      
+
       const modalTitle = document.getElementById('modalTitle');
       const modalCategory = document.getElementById('modalCategory');
       const modalDescription = document.getElementById('modalDescription');
       const modalGallery = document.getElementById('modalGallery');
-      
+
       // Function to close modal
       const closeModal = () => {
         modal.classList.remove('active');
@@ -276,10 +384,10 @@ document.addEventListener('DOMContentLoaded', () => {
           modalGallery.innerHTML = '';
         }, 300);
       };
-      
+
       // Add event listeners for closing
       if (closeBtn) closeBtn.addEventListener('click', closeModal);
-      
+
       if (modal) {
         modal.addEventListener('click', (e) => {
           // Close if clicking the overlay background itself (not the content)
@@ -288,27 +396,27 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       }
-      
+
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
           closeModal();
         }
       });
-      
+
       // Add click event to work cards
       const allWorkCards = document.querySelectorAll('.work-card');
       allWorkCards.forEach(card => {
         card.addEventListener('click', () => {
           const projectId = card.getAttribute('data-project-id');
           if (!projectId || !projectData[projectId] || !modal) return;
-          
+
           const data = projectData[projectId];
-          
+
           // Populate text data
           modalTitle.textContent = data.title;
           modalCategory.textContent = data.category;
           modalDescription.innerHTML = `<p>${data.description}</p>`;
-          
+
           // Populate images
           modalGallery.innerHTML = '';
           data.images.forEach(imgSrc => {
@@ -316,21 +424,21 @@ document.addEventListener('DOMContentLoaded', () => {
             img.src = imgSrc;
             img.alt = data.title;
             img.loading = 'lazy'; // Performance optimization
-            
+
             // Add animation class when image loads
             img.onload = () => {
               img.classList.add('loaded');
             };
-            
+
             modalGallery.appendChild(img);
           });
-          
+
           // Show the modal
           modal.classList.add('active');
           document.body.classList.add('modal-open');
         });
       });
-      
+
     })
     .catch(err => console.error('Error loading modal:', err));
 

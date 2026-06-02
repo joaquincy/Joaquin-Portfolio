@@ -299,10 +299,17 @@ document.addEventListener('DOMContentLoaded', () => {
       ]
     },
     "5": {
-      title: "Placeholder Project 5",
-      category: "Branding",
+      title: "Kartel Website",
+      category: "Website",
       description: "This is a placeholder description for project 5.",
-      images: ["/assets/images/Contemporary-world.webp"]
+      images: ["/assets/images/KartelWebsite.webp",
+        "/assets/images/Carousel1.webp",
+        "/assets/images/Carousel2.webp",
+        "/assets/images/Carousel3.webp",
+        "/assets/images/Pic3.webp",
+        "/assets/images/Pic4.webp",
+        "/assets/images/Pic5.webp",
+      ]
     },
     "6": {
       title: "Placeholder Project 6",

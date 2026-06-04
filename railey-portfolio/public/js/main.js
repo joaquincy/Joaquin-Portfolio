@@ -284,20 +284,26 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     "3": {
       title: "E-Nazareno Website",
-      category: "Print & Branding",
+      category: "Infomation Website",
       description: "Editorial layout and typography for the E-Nazareno project, bringing physical aesthetics into a digital format.",
       images: [
-        "/assets/images/Contemporary-world.webp"
+        "/assets/images/Homepage.webp",
+        "/assets/images/Homepage2.webp",
+        "/assets/images/Books.webp",
+        "/assets/images/Books2.webp",
+        "/assets/images/LamanLibro.webp",
+        "/assets/images/About.webp",
+        "/assets/images/About2.webp"
       ]
     },
-    "4": {
-      title: "Nexus Promo",
-      category: "Motion",
-      description: "A promotional motion graphics campaign for Nexus, designed to capture attention quickly on social media platforms.",
-      images: [
-        "/assets/images/Contemporary-world.webp"
-      ]
-    },
+    // "4": {
+    //   title: "Panuri",
+    //   category: "Motion",
+    //   description: "A promotional motion graphics campaign for Nexus, designed to capture attention quickly on social media platforms.",
+    //   images: [
+    //     "/assets/images/Contemporary-world.webp"
+    //   ]
+    // },
     "5": {
       title: "Kartel Website",
       category: "Website",
@@ -312,13 +318,13 @@ document.addEventListener('DOMContentLoaded', () => {
       ]
     },
     "6": {
-      title: "Placeholder Project 6",
+      title: "Panuri",
       category: "Web Design",
       description: "This is a placeholder description for project 6.",
       images: ["/assets/images/Contemporary-world.webp"]
     },
     "7": {
-      title: "Placeholder Project 7",
+      title: "Xpendly",
       category: "Print",
       description: "This is a placeholder description for project 7.",
       images: ["/assets/images/Contemporary-world.webp"]

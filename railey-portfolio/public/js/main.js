@@ -271,7 +271,8 @@ document.addEventListener('DOMContentLoaded', () => {
       description: "A complete rebranding and website redesign for Siomai Street, focusing on improving user engagement and modernizing their digital presence.",
       images: [
         "/assets/images/SiomaiStreet.webp",
-        "/assets/images/WebsiteView.webp"
+        "/assets/images/feedback.webp",
+        "/assets/images/menu.webp"
       ]
     },
     "2": {
@@ -321,7 +322,25 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "Panuri",
       category: "Web Design",
       description: "This is a placeholder description for project 6.",
-      images: ["/assets/images/Contemporary-world.webp"]
+      images: ["/assets/images/11.webp",
+        "/assets/images/1.webp",
+        "/assets/images/2.webp",
+        "/assets/images/3.webp",
+        "/assets/images/4.webp",
+        "/assets/images/5.webp",
+        "/assets/images/6.webp",
+        "/assets/images/7.webp",
+        "/assets/images/8.webp",
+        "/assets/images/9.webp",
+        "/assets/images/10.webp",
+        "/assets/images/12.webp",
+        "/assets/images/13.webp",
+        "/assets/images/14.webp",
+        "/assets/images/15.webp",
+        "/assets/images/16.webp",
+        "/assets/images/17.webp",
+        "/assets/images/Admin.webp"
+      ]
     },
     "7": {
       title: "Xpendly",
@@ -357,13 +376,23 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "Placeholder Project 12",
       category: "Motion",
       description: "This is a placeholder description for project 12.",
-      images: ["/assets/images/Contemporary-world.webp"]
+      images: ["/assets/images/BooksCover.webp",
+        "/assets/images/cover1.webp",
+        "/assets/images/cover2.webp",
+        "/assets/images/cover3.webp",
+        "/assets/images/cover4.webp",
+        "/assets/images/cover5.webp",
+        "/assets/images/cover6.webp"
+      ]
     },
     "13": {
       title: "Placeholder Project 13",
       category: "Branding",
       description: "This is a placeholder description for project 13.",
-      images: ["/assets/images/Contemporary-world.webp"]
+      images: ["/assets/images/filmposter1.webp",
+        "/assets/images/heart1.webp",
+        "/assets/images/heart2.webp"
+      ]
     },
     "14": {
       title: "Placeholder Project 14",

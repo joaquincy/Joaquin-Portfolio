@@ -455,6 +455,31 @@ document.addEventListener('DOMContentLoaded', () => {
           const y = ((e.clientY - rect.top) / rect.height) * 100;
           modalMainImage.style.transformOrigin = `${x}% ${y}%`;
         });
+
+        modalImageWrapper.addEventListener('touchstart', (e) => {
+          if (zoomLevel === 0) return;
+          const touch = e.touches[0];
+          const rect = modalImageWrapper.getBoundingClientRect();
+          let x = ((touch.clientX - rect.left) / rect.width) * 100;
+          let y = ((touch.clientY - rect.top) / rect.height) * 100;
+          x = Math.max(0, Math.min(100, x));
+          y = Math.max(0, Math.min(100, y));
+          modalMainImage.style.transformOrigin = `${x}% ${y}%`;
+        }, { passive: true });
+
+        modalImageWrapper.addEventListener('touchmove', (e) => {
+          if (zoomLevel === 0) return;
+          // Prevent page scroll when dragging zoomed image
+          if (e.cancelable) e.preventDefault();
+
+          const touch = e.touches[0];
+          const rect = modalImageWrapper.getBoundingClientRect();
+          let x = ((touch.clientX - rect.left) / rect.width) * 100;
+          let y = ((touch.clientY - rect.top) / rect.height) * 100;
+          x = Math.max(0, Math.min(100, x));
+          y = Math.max(0, Math.min(100, y));
+          modalMainImage.style.transformOrigin = `${x}% ${y}%`;
+        }, { passive: false });
       }
 
       let currentImages = [];

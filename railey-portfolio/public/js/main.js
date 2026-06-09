@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: "Web Design",
       description: "An e-commerce platform built for The Contemporary World, optimizing conversion rates and providing a seamless shopping experience.",
       images: [
-        "/assets/images/Contemporary-world.webp"
+        "/assets/images/contemporarycover.png"
       ]
     },
     "3": {
@@ -421,11 +421,49 @@ document.addEventListener('DOMContentLoaded', () => {
       const modalNextBtn = document.getElementById('modalNextBtn');
       const modalThumbnails = document.getElementById('modalThumbnails');
 
+      // Zoom feature variables and event handlers
+      const modalImageWrapper = document.querySelector('.modal-main-image-wrapper');
+      let zoomLevel = 0; // 0: None (1x), 1: Medium (1.8x), 2: Max (3x)
+
+      const resetZoom = () => {
+        if (!modalMainImage) return;
+        zoomLevel = 0;
+        modalMainImage.classList.remove('zoom-level-1', 'zoom-level-2');
+        modalMainImage.style.transformOrigin = 'center center';
+      };
+
+      if (modalMainImage && modalImageWrapper) {
+        modalMainImage.addEventListener('click', () => {
+          // Cycle through levels: 0 -> 1 -> 2 -> 0
+          zoomLevel = (zoomLevel + 1) % 3;
+
+          modalMainImage.classList.remove('zoom-level-1', 'zoom-level-2');
+
+          if (zoomLevel === 1) {
+            modalMainImage.classList.add('zoom-level-1');
+          } else if (zoomLevel === 2) {
+            modalMainImage.classList.add('zoom-level-2');
+          } else {
+            resetZoom();
+          }
+        });
+
+        modalImageWrapper.addEventListener('mousemove', (e) => {
+          if (zoomLevel === 0) return;
+          const rect = modalImageWrapper.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100;
+          const y = ((e.clientY - rect.top) / rect.height) * 100;
+          modalMainImage.style.transformOrigin = `${x}% ${y}%`;
+        });
+      }
+
       let currentImages = [];
       let currentImageIndex = 0;
 
       const updateGallery = () => {
         if (!currentImages || currentImages.length === 0) return;
+
+        resetZoom();
 
         // Setup main image
         modalMainImage.style.opacity = '0'; // For transition effect
@@ -479,6 +517,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.remove('active');
         document.body.classList.remove('modal-open');
         document.documentElement.classList.remove('modal-open');
+        resetZoom();
         setTimeout(() => {
           if (modalMainImage) modalMainImage.src = '';
           if (modalThumbnails) modalThumbnails.innerHTML = '';

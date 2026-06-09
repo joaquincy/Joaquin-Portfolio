@@ -157,7 +157,19 @@ body.dark-theme .work-modal-content {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: zoom-in;
+  will-change: transform, transform-origin;
+}
+
+#modalMainImage.zoom-level-1 {
+  transform: scale(1.8);
+  cursor: zoom-in;
+}
+
+#modalMainImage.zoom-level-2 {
+  transform: scale(3);
+  cursor: zoom-out;
 }
 
 .modal-nav-btn {

@@ -398,7 +398,61 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "Placeholder Project 14",
       category: "Web Design",
       description: "This is a placeholder description for project 14.",
-      images: ["/assets/images/Contemporary-world.webp"]
+      images: ["/assets/images/canva.webp",
+        "/assets/images/canva1.webp",
+        "/assets/images/canva2.webp",
+        "/assets/images/canva3.webp",
+        "/assets/images/canva4.webp",
+        "/assets/images/canva5.webp",
+        "/assets/images/canva6.webp",
+        "/assets/images/canva7.webp",
+        "/assets/images/canva8.webp",
+        "/assets/images/canva9.webp",
+        "/assets/images/canva10.webp",
+        "/assets/images/ill1.webp",
+        "/assets/images/ill2.webp",
+        "/assets/images/ill3.webp",
+        "/assets/images/ill4.webp",
+        "/assets/images/ill5.webp",
+        "/assets/images/ill6.webp",
+        "/assets/images/ill7.webp",
+        "/assets/images/ill8.webp",
+        "/assets/images/ill9.webp",
+        "/assets/images/ill10.webp",
+        "/assets/images/ill11.webp",
+        "/assets/images/ill12.webp",
+        "/assets/images/ill13.webp",
+        "/assets/images/ill14.webp"
+      ]
+    },
+    "15": {
+      title: "Placeholder Project 15",
+      category: "Web Design",
+      description: "This is a placeholder description for project 14.",
+      images: ["/assets/images/canva.webp",
+        "https://res.cloudinary.com/dpqkzsek6/video/upload/f_auto,q_auto/v1781068949/introduction_uv7ztn.mp4"
+      ]
+    },
+    "16": {
+      title: "Placeholder Project 15",
+      category: "Web Design",
+      description: "This is a placeholder description for project 14.",
+      images: ["/assets/images/canva.webp"
+      ]
+    },
+    "17": {
+      title: "Placeholder Project 15",
+      category: "Web Design",
+      description: "This is a placeholder description for project 14.",
+      images: ["/assets/images/canva.webp"
+      ]
+    },
+    "18": {
+      title: "Placeholder Project 15",
+      category: "Web Design",
+      description: "This is a placeholder description for project 14.",
+      images: ["/assets/images/canva.webp"
+      ]
     }
   };
 
@@ -417,6 +471,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const modalDescription = document.getElementById('modalDescription');
 
       const modalMainImage = document.getElementById('modalMainImage');
+      const modalMainVideo = document.getElementById('modalMainVideo');
       const modalPrevBtn = document.getElementById('modalPrevBtn');
       const modalNextBtn = document.getElementById('modalNextBtn');
       const modalThumbnails = document.getElementById('modalThumbnails');
@@ -485,42 +540,85 @@ document.addEventListener('DOMContentLoaded', () => {
       let currentImages = [];
       let currentImageIndex = 0;
 
+      const isVideo = (url) => {
+        if (!url) return false;
+        return url.match(/\.(mp4|webm|ogg)$/i) || url.includes('video/upload');
+      };
+
       const updateGallery = () => {
         if (!currentImages || currentImages.length === 0) return;
 
         resetZoom();
 
-        // Setup main image
-        modalMainImage.style.opacity = '0'; // For transition effect
+        const currentSrc = currentImages[currentImageIndex];
+        const isVid = isVideo(currentSrc);
+
+        // Setup main image/video
+        if (modalMainImage) modalMainImage.style.opacity = '0';
+        if (modalMainVideo) modalMainVideo.style.opacity = '0';
+
         setTimeout(() => {
-          modalMainImage.src = currentImages[currentImageIndex];
-          modalMainImage.onload = () => { modalMainImage.style.opacity = '1'; };
+          if (isVid) {
+            if (modalMainImage) {
+              modalMainImage.style.display = 'none';
+              modalMainImage.src = '';
+            }
+            if (modalMainVideo) {
+              modalMainVideo.style.display = 'block';
+              modalMainVideo.src = currentSrc;
+              modalMainVideo.onloadeddata = () => { modalMainVideo.style.opacity = '1'; };
+              setTimeout(() => { modalMainVideo.style.opacity = '1'; }, 150); // Fallback
+            }
+          } else {
+            if (modalMainVideo) {
+              modalMainVideo.style.display = 'none';
+              modalMainVideo.src = '';
+            }
+            if (modalMainImage) {
+              modalMainImage.style.display = 'block';
+              modalMainImage.src = currentSrc;
+              modalMainImage.onload = () => { modalMainImage.style.opacity = '1'; };
+            }
+          }
         }, 150);
 
         // Setup thumbnails
-        modalThumbnails.innerHTML = '';
-        if (currentImages.length > 1) {
-          modalThumbnails.style.display = 'flex';
-          currentImages.forEach((imgSrc, index) => {
-            const thumb = document.createElement('img');
-            thumb.src = imgSrc;
-            thumb.alt = `Thumbnail ${index + 1}`;
-            thumb.className = 'modal-thumbnail' + (index === currentImageIndex ? ' active' : '');
-            thumb.loading = 'lazy';
-            thumb.addEventListener('click', () => {
-              currentImageIndex = index;
-              updateGallery();
-            });
-            modalThumbnails.appendChild(thumb);
-          });
+        if (modalThumbnails) {
+          modalThumbnails.innerHTML = '';
+          if (currentImages.length > 1) {
+            modalThumbnails.style.display = 'flex';
+            currentImages.forEach((imgSrc, index) => {
+              const isThumbVid = isVideo(imgSrc);
+              let thumb;
 
-          if (modalPrevBtn) modalPrevBtn.style.display = 'flex';
-          if (modalNextBtn) modalNextBtn.style.display = 'flex';
-        } else {
-          modalThumbnails.style.display = 'none';
-          if (modalPrevBtn) modalPrevBtn.style.display = 'none';
-          if (modalNextBtn) modalNextBtn.style.display = 'none';
+              if (isThumbVid && !imgSrc.includes('cloudinary.com')) {
+                thumb = document.createElement('video');
+                thumb.src = imgSrc;
+                thumb.muted = true;
+                thumb.playsInline = true;
+                thumb.preload = 'metadata';
+              } else {
+                thumb = document.createElement('img');
+                // For cloudinary videos, change extension to .jpg for lightweight thumbnail
+                thumb.src = isThumbVid ? imgSrc.replace(/\.(mp4|webm|ogg)$/i, '.jpg') : imgSrc;
+                thumb.alt = `Thumbnail ${index + 1}`;
+                thumb.loading = 'lazy';
+              }
+
+              thumb.className = 'modal-thumbnail' + (index === currentImageIndex ? ' active' : '');
+              thumb.addEventListener('click', () => {
+                currentImageIndex = index;
+                updateGallery();
+              });
+              modalThumbnails.appendChild(thumb);
+            });
+          } else {
+            modalThumbnails.style.display = 'none';
+          }
         }
+
+        if (modalPrevBtn) modalPrevBtn.style.display = currentImages.length > 1 ? 'flex' : 'none';
+        if (modalNextBtn) modalNextBtn.style.display = currentImages.length > 1 ? 'flex' : 'none';
       };
 
       if (modalPrevBtn) {
@@ -545,6 +643,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resetZoom();
         setTimeout(() => {
           if (modalMainImage) modalMainImage.src = '';
+          if (modalMainVideo) modalMainVideo.src = '';
           if (modalThumbnails) modalThumbnails.innerHTML = '';
         }, 300);
       };

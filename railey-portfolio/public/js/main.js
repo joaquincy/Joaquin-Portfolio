@@ -434,24 +434,41 @@ document.addEventListener('DOMContentLoaded', () => {
       ]
     },
     "16": {
-      title: "Placeholder Project 15",
+      title: "Placeholder Project 16",
       category: "Web Design",
       description: "This is a placeholder description for project 14.",
       images: ["/assets/images/canva.webp"
       ]
     },
     "17": {
-      title: "Placeholder Project 15",
+      title: "Placeholder Project 17",
       category: "Web Design",
       description: "This is a placeholder description for project 14.",
-      images: ["/assets/images/canva.webp"
+      images: ["/assets/images/canva.webp",
+        "https://res.cloudinary.com/dpqkzsek6/video/upload/f_auto,q_auto/v1781070461/nameintro_sydnss.mp4"
       ]
     },
     "18": {
-      title: "Placeholder Project 15",
+      title: "Placeholder Project 18",
       category: "Web Design",
       description: "This is a placeholder description for project 14.",
-      images: ["/assets/images/canva.webp"
+      images: ["/assets/images/canva.webp",
+        "https://res.cloudinary.com/dpqkzsek6/video/upload/f_auto,q_auto/v1781071717/commercial_d5u3en.mp4"
+      ]
+    },
+
+    "19": {
+      title: "Placeholder Project 19",
+      category: "Web Design",
+      description: "This is a placeholder description for project 14.",
+      images: ["https://res.cloudinary.com/dpqkzsek6/video/upload/f_auto,q_auto/v1781072820/selfintroductionv2_xsnokm.mp4",
+      ]
+    },
+    "20": {
+      title: "Placeholder Project 20",
+      category: "Web Design",
+      description: "This is a placeholder description for project 14.",
+      images: ["/assets/images/canva.webp",
       ]
     }
   };

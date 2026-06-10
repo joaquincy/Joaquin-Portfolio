@@ -429,8 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "Placeholder Project 15",
       category: "Web Design",
       description: "This is a placeholder description for project 14.",
-      images: ["/assets/images/canva.webp",
-        "https://res.cloudinary.com/dpqkzsek6/video/upload/f_auto,q_auto/v1781068949/introduction_uv7ztn.mp4"
+      images: ["https://res.cloudinary.com/dpqkzsek6/video/upload/f_auto,q_auto/v1781068949/introduction_uv7ztn.mp4"
       ]
     },
     "16": {

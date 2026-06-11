@@ -436,7 +436,9 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "Placeholder Project 16",
       category: "Web Design",
       description: "This is a placeholder description for project 14.",
-      images: ["/assets/images/canva.webp"
+      images: ["/assets/images/enazarenologo.webp",
+        "/assets/images/panurilogo.webp",
+        "/assets/images/xenithlogo.webp"
       ]
     },
     "17": {

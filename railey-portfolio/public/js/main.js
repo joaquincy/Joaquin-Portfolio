@@ -358,7 +358,12 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "Placeholder Project 9",
       category: "Branding & Web",
       description: "This is a placeholder description for project 9.",
-      images: ["/assets/images/Contemporary-world.webp"]
+      images: ["/assets/images/t1.png",
+        "/assets/images/u9.webp",
+        "/assets/images/u11.webp",
+        "/assets/images/u12.webp",
+        "/assets/images/u13.webp",
+      ]
     },
     "10": {
       title: "Placeholder Project 10",
@@ -370,7 +375,24 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "Placeholder Project 11",
       category: "Web Design",
       description: "This is a placeholder description for project 11.",
-      images: ["/assets/images/Contemporary-world.webp"]
+      images: ["/assets/images/a.webp",
+        "/assets/images/b.webp",
+        "/assets/images/c.webp",
+        "/assets/images/d.webp",
+        "/assets/images/e.webp",
+        "/assets/images/f.webp",
+        "/assets/images/g.webp",
+        "/assets/images/h.webp",
+        "/assets/images/i.webp",
+        "/assets/images/j.webp",
+        "/assets/images/k.webp",
+        "/assets/images/l.webp",
+        "/assets/images/m.webp",
+        "/assets/images/n.webp",
+        "/assets/images/o.webp",
+        "/assets/images/p.webp",
+        "/assets/images/q.webp",
+      ]
     },
     "12": {
       title: "Placeholder Project 12",
@@ -445,8 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "Placeholder Project 17",
       category: "Web Design",
       description: "This is a placeholder description for project 14.",
-      images: ["/assets/images/canva.webp",
-        "https://res.cloudinary.com/dpqkzsek6/video/upload/f_auto,q_auto/v1781070461/nameintro_sydnss.mp4"
+      images: ["https://res.cloudinary.com/dpqkzsek6/video/upload/f_auto,q_auto/v1781070461/nameintro_sydnss.mp4"
       ]
     },
     "18": {
@@ -465,11 +486,34 @@ document.addEventListener('DOMContentLoaded', () => {
       images: ["https://res.cloudinary.com/dpqkzsek6/video/upload/f_auto,q_auto/v1781072820/selfintroductionv2_xsnokm.mp4",
       ]
     },
+
     "20": {
       title: "Placeholder Project 20",
       category: "Web Design",
       description: "This is a placeholder description for project 14.",
       images: ["/assets/images/canva.webp",
+      ]
+    },
+
+    "21": {
+      title: "Placeholder Project 21",
+      category: "Web Design",
+      description: "This is a placeholder description for project 14.",
+      images: ["/assets/images/u2.webp",
+        "/assets/images/u5.webp",
+        "/assets/images/u6.webp",
+        "/assets/images/u7.webp",
+        "/assets/images/u8.webp",
+      ]
+    },
+
+    "22": {
+      title: "Placeholder Project 22",
+      category: "Web Design",
+      description: "This is a placeholder description for project 14.",
+      images: ["/assets/images/u3.webp",
+        "/assets/images/u4.webp",
+        "/assets/images/u1.webp"
       ]
     }
   };
